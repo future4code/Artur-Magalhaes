@@ -1,0 +1,12 @@
+.footer{
+    height: 100%;
+    background-color: black;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+.pesquisar{
+    display: flex;
+    justify-content: center;
+}
+

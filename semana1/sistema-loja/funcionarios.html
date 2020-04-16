@@ -3,35 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="content.css">
+    <link rel="stylesheet" href="footer.css">
     <title>Document</title>
 </head>
 <body>
-    <div><h1>SMV - StoreMarketVirtual</h1></div>
-    <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="estoque.html">Estoque</a></li>
-        <li><a href="addProd.html">Adicionar Produto</a></li>
-        <li><a href="funcionarios.html">Funcionários</a></li>
-    </ul>
-    <div>
-        <h2>Lista de Funcionários</h2>
-        <ol>
-            <li>
-                <strong>Artur</strong> - 04/12/1990
-            </li>
-            <li>
-                <strong>Carol</strong> - 01/01/1998
-            </li>
-            <li>
-                <strong>Larissa</strong> - 16/12/1998
-            </li>
-            <li>
-                <strong>Lucas</strong> - 24/04/1996
-            </li>
-            <li>
-                <strong>Maria</strong> - 13/02/1998
-            </li>
-        </ol>
+    <div class="header">
+        <ul class="menu-principal">
+            <li><a class="a-header" href="index.html">HOME</a></li>
+            <li><a class="a-header" href="estoque.html">ESTOQUE</a></li>
+            <li><a class="a-header" href="funcionarios.html">FUNCIONÁRIOS</a></li>
+        </ul>
+        </div>
+    <div class="conteudo">
+        <div>
+            <h1>SMV - StoreMarketVirtual</h1>
+        </div>
+        <div>
+            <h2 class="h2-estoque">Lista de Funcionários</h2>
+            <ol id="lista-funcionarios">
+                <li>
+                    <strong>Artur</strong> - 04/12/1990
+                </li>
+                <li>
+                    <strong>Carol</strong> - 01/01/1998
+                </li>
+                <li>
+                    <strong>Larissa</strong> - 16/12/1998
+                </li>
+                <li>
+                    <strong>Lucas</strong> - 24/04/1996
+                </li>
+                <li>
+                    <strong>Maria</strong> - 13/02/1998
+                </li>
+            </ol>
+            
+        </div>
+    </div>
+    <div class="footer">
+        <div class="pesquisar">
+        <input class="pesquisar" placeholder="Pesquisar">
+        <button type="submit">Enviar</button>
+        </div>
     </div>
 </body>
 </html>

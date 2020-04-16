@@ -4,40 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="content.css">
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="footer.css">
 </head>
 <body>
-    <div>
-        <div><h1>SMV - StoreMarketVirtual</h1></div>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="estoque.html">Estoque</a></li>
-            <li><a href="addProd.html">Adicionar Produto</a></li>
-            <li><a href="funcionarios.html">Funcionários</a></li>
+    <div class="header">
+        <ul class="menu-principal">
+            <li><a class="a-header" href="index.html">HOME</a></li>
+            <li><a class="a-header" href="estoque.html">ESTOQUE</a></li>
+            <li><a class="a-header" href="funcionarios.html">FUNCIONÁRIOS</a></li>
         </ul>
+    </div>
+    <div class="conteudo">
         <div>
-            <h2>Adicione o produto ao estoque</h2>
-            <form>
+            <h1>SMV - StoreMarketVirtual</h1>
+        </div>
+        <div>
+            <h2 class="h2-estoque">Adicione o produto ao estoque</h2>
+            <form class="h2-estoque">
                 <div>
-                    <label id="produto">Produto</label>
+                    <label class="form-produto">Produto</label>
                     <input type="text">
                 </div>
                 <div>
-                    <label id="img-prod">Imagem</label>
+                    <label class="form-produto">Imagem</label>
                     <input type="file">
                 </div>
                 <div>
-                    <label id="preco-prod">Preço</label>
+                    <label class="form-produto">Preço</label>
                     <input type="number">
                 </div>
                 <div>
-                    <label id="quantidade-disponivel">Quantidade Disponível</label>
+                    <label class="form-produto">Quantidade Disponível</label>
                     <input type="number">
                 </div>
                 <div>
-                    <button type="submit">Enviar</button>
+                    <button id="form-button" type="submit">Enviar</button>
                 </div>
             </form>
         </div>
     </div>
+    <div class="footer">
+        <div class="pesquisar">
+        <input class="pesquisar" placeholder="Pesquisar">
+        <button type="submit">Enviar</button>
+        </div>
+    </div>    
 </body>
 </html>
