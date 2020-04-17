@@ -1,9 +1,9 @@
 .content-port{
-    
+    background-image: linear-gradient(gray, #474747);
 }
 
 h1{
-    margin-top: 2%;
+    padding-top: 2%;
     text-align: center;
 }
 
