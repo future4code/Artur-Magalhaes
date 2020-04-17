@@ -4,47 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="content.css">
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="footer.css">
 </head>
-<body>
-    <div><h1>SMV - StoreMarketVirtual</h1></div>
-    <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="estoque.html">Estoque</a></li>
-        <li><a href="addProd.html">Adicionar Produto</a></li>
-        <li><a href="funcionarios.html">Funcionários</a></li>
-    </ul>
-    <div>
-        <h2>Estoque da SMV</h2>
-        <table>
-            <tr>
-                <th>Produto</th>
-                <th>Imagem</th>
-                <th>Descrição</th>
-                <th>Preço</th>
-                <th>Quantidade Disponível</th>
-            </tr>
-            <tr>
-                <td>Guitarra</td>
-                <td><img src="img/FreeVector-Vector-Les-Paul-Guitar.jpg" alt="Guitarra Les Paul Tradicional"></td>
-                <td>Guitarra Les Paul Tradicional!</td>
-                <td>1000,00</td>
-                <td>7</td>
-            </tr>
-            <tr>
-                <td>Guitarra</td>
-                <td><img src="img/FreeVector-Les-Paul-Guitar.jpg" alt="Guitarra Les Paul Vermelha"></td>
-                <td>Guitarra Les Paul Vermelha!</td>
-                <td>350,00</td>
-                <td>8</td>
-            </tr>
-            <tr>
-                <td>Guitarra</td>
-                <td><img src="img/FreeVector-Gibson-Les-Paul-Guitar.jpg" alt="Guitarra Les Paul Preta"></td>
-                <td>Guitarra Les Paul Tradicional!</td>
-                <td>500,00</td>
-                <td>3</td>
-            </tr>
-        </table>
+<body>    
+    <div class="header">
+        <ul class="menu-principal">
+            <li><a class="a-header" href="index.html">HOME</a></li>
+            <li><a class="a-header" href="estoque.html">ESTOQUE</a></li>
+            <li><a class="a-header" href="funcionarios.html">FUNCIONÁRIOS</a></li>
+        </ul>
+    </div>
+    <div class="conteudo">
+        <div>
+            <h1>SMV - StoreMarketVirtual</h1>
+            <h2 class="h2-estoque">Estoque da SMV</h2>
+        <div>
+            <table>
+                <tr>
+                    <th>Produto</th>
+                    <th>Imagem</th>
+                    <th>Descrição</th>
+                    <th>Preço</th>
+                    <th>Quantidade Disponível</th>
+                </tr>
+                <tr>
+                    <td>Guitarra</td>
+                    <td><img class="img-produto" src="img/FreeVector-Vector-Les-Paul-Guitar.jpg" alt="Guitarra Les Paul Tradicional"></td>
+                    <td>Guitarra Les Paul Tradicional!</td>
+                    <td>1000,00</td>
+                    <td>7</td>
+                </tr>
+                <tr>
+                    <td>Guitarra</td>
+                    <td><img class="img-produto" src="img/FreeVector-Les-Paul-Guitar.jpg" alt="Guitarra Les Paul Vermelha"></td>
+                    <td>Guitarra Les Paul Vermelha!</td>
+                    <td>350,00</td>
+                    <td>8</td>
+                </tr>
+                <tr>
+                    <td>Guitarra</td>
+                    <td><img class="img-produto" src="img/FreeVector-Gibson-Les-Paul-Guitar.jpg" alt="Guitarra Les Paul Preta"></td>
+                    <td>Guitarra Les Paul Tradicional!</td>
+                    <td>500,00</td>
+                    <td>3</td>
+                </tr>
+                <h3 class="h3-estoque"><a id="a-h3" href="addProd.html">+ Produto</a></h3>
+            </table>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="pesquisar">
+        <input class="pesquisar" placeholder="Pesquisar">
+        <button type="submit">Enviar</button>
+        </div>
     </div>
 </body>
 </html>
