@@ -1,0 +1,70 @@
+.content{
+}
+
+.destaques{
+    display: flex;
+}
+
+#sobre-mim{
+    width: 65%;
+    display: inline-block;
+    margin: 3% 6%;
+}
+
+#instituicoes{
+    width: 25%;
+    display: inline-block;
+    margin: 3% 6%;
+}
+
+#portfolio{
+    margin: 0% 6% 6% 6%;
+}
+
+.portifolio{
+    border-radius: 1px solid;
+}
+
+#galeria{
+    display: flex;
+}
+
+.h3-content{
+    margin-bottom: 2%;
+    text-align: center;
+}
+
+p{
+    padding: 2% 0%;
+    text-align: justify;
+    color: #E8E8E8;
+}
+
+.p-portfolio{
+    text-align: center;
+}
+
+ol{
+    margin: 2% 0%;
+}
+
+ol li{
+    text-align: justify;
+    margin-left: 5%;
+    color: #E8E8E8;
+}
+
+
+.img-portfolio{
+    width: 95%;
+    height: 100%;
+}
+.habilidades{
+    margin: 0% 3% 6% 3%;
+    color: #E8E8E8;
+}
+
+.habilidade{
+    margin: 1% 6%;
+    display: flex;
+}

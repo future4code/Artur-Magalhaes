@@ -1,0 +1,25 @@
+*{
+    margin: 0%;
+    padding: 0%;
+}
+
+body{
+    background-color: gray;
+}
+
+.header{
+    background-color: black;
+}
+
+.header ul{
+    padding: 1%;
+}
+.header ul li{
+    display: inline;
+    margin-left: 5%;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}

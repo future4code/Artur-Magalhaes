@@ -1,0 +1,50 @@
+.content-port{
+    
+}
+
+h1{
+    margin-top: 2%;
+    text-align: center;
+}
+
+#h3-descricao{
+    text-align: center;
+    margin: 1%;
+}
+
+#a-portfolio{
+    text-decoration: none;
+    color: black;
+}
+
+#a-portfolio:hover{
+    color: white;
+}
+
+#img-principal{
+    margin-top: 3%;
+    width: 60%;
+    height: 60%;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+}
+
+#especificacoes{
+    display: flex;
+}
+
+#div-port{
+    margin: 2% 3% 2% 18%;
+    width: 45%;
+    text-align: justify;
+}
+
+#list-tecnologias{
+    padding: 1% 0% 3% 0%;
+    margin: 2%;
+}
+
+ul li{ 
+    padding-top: 2%;
+}
