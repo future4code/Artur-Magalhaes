@@ -24,10 +24,12 @@ input {
     border-top: none;
     border-right: none;
     border-bottom: 2px gray solid;
+    outline: 0;
 }
 
 button:focus {
     color: white;
+    outline: 0;
 }
 
 button:hover{
@@ -55,6 +57,7 @@ div img {
     color: white;
     display: block;
     margin: auto;
+    outline: 0;
 }
 
 .botao-amarelo:hover {
@@ -145,6 +148,7 @@ td button {
     color: black;
     margin: auto;
     display: block;
+    outline: 0;
 }
 
 #back-button:hover {
