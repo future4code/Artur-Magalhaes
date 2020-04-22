@@ -1,0 +1,163 @@
+/** 
+  *
+  *  ESTILOS GERAIS 
+  *
+  **/
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto Light', 'Roboto Medium', 'Roboto', etc;
+}
+
+h2 {
+    background-color: #fe7e02;
+    padding: 10px 5px 10px 5px;
+    color: white;
+    text-align: center;
+}
+
+input {
+    height: 20px;
+    width: 500px;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    border-bottom: 2px gray solid;
+    outline: 0;
+}
+
+button:focus {
+    color: white;
+    outline: 0;
+}
+
+button:hover{
+    background-color: #ffaf43;
+}
+
+img {
+    width: 40px;
+    height: 40px;
+}
+
+div>p:first-child {
+    display: inline;
+}
+
+div img {
+}
+
+.botao-amarelo {
+    background-color: #ffaf43;
+    width: 250px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 20px;
+    color: white;
+    display: block;
+    margin: auto;
+    outline: 0;
+}
+
+.botao-amarelo:hover {
+    background-color: #c44f00;
+}
+
+a{
+    text-decoration: none;
+}
+
+.container {
+    height: 500px;
+    text-align: center;
+}
+
+.icone {
+    height: 16px;
+}
+
+.icone:hover {
+    opacity: 0.5;
+}
+
+.icone:active {
+    opacity: 1;
+}
+
+/** 
+  *
+  *  ESTILOS HOME 
+  *
+  **/
+
+#container-de-descricao {
+    background-color: #2274a5;
+    color: white;
+    padding-top: 5%;
+    padding-right: 42%;
+    padding-left: 42%;
+}
+
+#container-de-descricao>ol {
+    padding: 15px 0px;
+}
+
+#container-para-comprar {
+    background-color: #e7eb90;
+}
+
+#container-para-comprar>p {
+    color: #c44f00;
+    padding: 100px 0;
+    font-size: 60px;
+}
+
+
+/**
+  *
+  *  ESTILOS COMPRAR 
+  *
+  **/
+
+div:nth-child(2),
+div:last-child {
+    text-align: center;
+}
+
+table {
+    margin: auto;
+    text-align: center;
+    width: 60%;
+}
+
+td button {
+    background-color: #fadf63;
+    width: 150px;
+    height: 30px;
+    border-radius: 5px;
+    color: black;
+}
+
+.container-do-search {
+    margin-top: 20px;
+    height: 100px;
+}
+
+
+#back-button {
+    background-color: white;
+    width: 100px;
+    height: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 10px;
+    color: black;
+    margin: auto;
+    display: block;
+    outline: 0;
+}
+
+#back-button:hover {
+    background-color: #635a3d
+}
