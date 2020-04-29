@@ -113,58 +113,39 @@ else{
 //5.
 //a. https://drive.google.com/open?id=1lJwMhP01hBT3hdHggSYQRpkTN1o9NQpy
 //b.
-const ossos = prompt("Possui osso? S ou N")
+const ossos = prompt("Possui osso? s ou n")
 let animal
-switch (ossos.toUpperCase){
-    case "S": 
-        animal += "Animal Vertebrado, "
-        console.log("Animal Vertebrado")
-        break;
-    case "N":
-        console.log("Animal Invertebrado")
-        break;
-}
 
-const pelos = prompt("Possui pelo? S ou N")
-
-switch (pelos.toUpperCase){
-    case "S":
+if (ossos == "s"){
+    animal = "Animal Vertebrado, "
+    console.log("Animal Vertebrado")
+    const pelos = prompt("Possui pelo? s ou n")
+    if (pelos == "s"){
         animal += "mamífero. "
         console.log("Mamífero");
-        break;
-    case "N":
-        console.log("Não é mamífero")
-        break;
-}
-
-const penas = prompt("Possui pena? S ou N")
-
-switch (penas.toUpperCase){
-    case "S":
-        animal += "ave. "
-        console.log("Ave");
-        break;
-    case "N":
-        console.log("Não é ave")
-        break;
-}
-
-const terrestre = prompt("Terrestre? S ou N")
-
-switch (terrestre.toUpperCase){
-    case "S":
-        const aquatico = prompt("Parte Aquática? S ou N")
-        if (aquatico.toUpperCase == "S"){
-            animal += "Anfíbio. "
-            console.log("Anfíbio");
-        }else{   
-            animal += "Réptil. "
-            console.log("Réptil")
+    }else{
+        const penas = prompt("Possui pena? s ou n")
+        if (penas == "s"){
+            animal += "ave. "
+            console.log("Ave");
+        }else{
+            const terrestre = prompt("Terrestre? s ou n")
+            if (terrestre == "s"){
+                const aquatico = prompt("Parte Aquática? s ou n")
+                if (aquatico == "s"){
+                   animal += "Anfíbio. "
+                    console.log("Anfíbio");
+                }else{   
+                    animal += "Réptil. "
+                    console.log("Réptil")
+                }
+            }else{
+                animal += "Peixe. "
+                console.log("É peixe.")
+            }
         }
-        break;
-    case "N":
-        animal += "Peixe. "
-        console.log("É peixe.")
-        break;
+    }
+    console.log(animal)
+}else{
+    console.log("Animal Invertebrado")
 }
-
