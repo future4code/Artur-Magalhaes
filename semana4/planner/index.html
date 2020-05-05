@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer ></script>
+    <title>Planner Digital</title>
+</head>
+<body>
+    <div id="addTarefa">
+        <label>Nova Tarefa: </label>
+        <input type="text">
+        <select id="dia" name="dias-da-semana">
+            <option value="dom">Domingo</option>
+            <option value="seg">Segunda</option>
+            <option value="ter">Terça</option>
+            <option value="qua">Quarta</option>
+            <option value="qui">Quinta</option>
+            <option value="sex">Sexta</option>
+            <option value="sab">Sábado</option>
+        </select>
+        <button onclick="salvarTarefa()">Criar Tarefa</button>
+    </div>
+    <div id="template">
+        <div class="div-dia" id="dom">
+            <div>Domingo</div>
+            <ul></ul>
+        </div>
+        <div class="div-dia" id="seg">
+            <div>Segunda</div>
+            <ul></ul>
+        </div>
+        <div class="div-dia" id="ter">
+            <div>Terça</div>
+            <ul></ul>
+        </div>
+        <div class="div-dia" id="qua">
+            <div>Quarta</div>
+            <ul></ul>
+        </div>
+        <div class="div-dia" id="qui">
+            <div>Quinta</div>
+            <ul></ul>
+        </div>
+        <div class="div-dia" id="sex">
+            <div>Sexta</div>
+            <ul></ul>
+        </div>
+        <div class="div-dia" id="sab">
+            <div>Sábado</div>
+            <ul></ul>
+        </div>
+    </div>
+</body>
+</html>
