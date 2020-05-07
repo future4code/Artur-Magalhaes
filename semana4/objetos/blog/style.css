@@ -1,0 +1,58 @@
+body{
+    background-color: #aaaaaa;
+}
+
+#form{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: #CCC;
+    width: 40%;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 8px;
+    column-gap: 1em;
+}
+
+label{
+    grid-column: 1;
+}
+
+input{
+    grid-column: 1;
+}
+
+textarea{
+    grid-column: 2;
+    grid-row: 2/5;
+}
+
+
+#div-conteudo{
+    background-color: #aaaaaa;
+}
+
+div{
+    display: grid;
+    background-color: #CCC;
+    width: 80%;
+    margin: 1em;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 0 1em 1em 1em;
+}
+
+p{
+    text-align: justify;
+    text-overflow: inherit;
+    font-size: 16px;
+}
+
+textarea{
+    resize: none;
+}
+
+img{
+    width: 200pt;
+    height: 200pt;
+}
