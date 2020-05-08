@@ -26,3 +26,93 @@ Console exibirá:
 -10
 283
 */
+
+//#####################################
+
+/*Lógica de Programação
+1.
+for(i = 0; i < array.length; i++){}
+for(arr of array){}
+array.forEach(){}
+
+const array = [1,2,3,4,5,6,7,8]
+for(let array of array){
+    console.log(array);
+}
+
+
+2.
+const booleano1 = true
+const booleano2 = false
+const booleano3 = !booleano2 => true
+const booleano4 = !booleano3 => false
+    a) true && false && true 
+        false
+    
+    b) (true && false) || false
+        false
+
+    c) (false || true) && (false || true)
+        true
+    
+    d) !(false && true) || !(true && true)
+        true
+
+    e) !true && !true || (!false && true && true)
+        true
+
+
+3. O código da um loop infinito por que não ter incremento no i.
+
+const quantidadeDeNumerosPares = 5
+let i = 0
+while(i < quantidadeDeNumerosPares) {
+  console.log(i*2)
+  i++;
+}
+
+
+4.
+function triangulo(a, b, c) {
+    if (a === b && a === c){
+        return "Equilátero";
+    }
+    else if ((a === b) || (a == c) || (b == c)){
+        return "Isóceles";
+    }
+    else{
+        return "Escaleno";
+    }
+}
+
+console.log(triangulo(2,2,2))
+
+
+5.
+const operacoes = (a, b) => {
+    let diferenca = 0
+    if(a > b){
+        console.log(`O maior é ${a}`)
+        diferenca = a - b
+    }else{
+        console.log(`O maior é ${b}`)
+        diferenca = b - a
+    }
+    if(a % b == 0){
+        console.log(`${a} é divisível por ${b}`)
+    }else{
+        console.log(`${a} não é divisível por ${b}`)
+    }
+    if(b % a == 0){
+        console.log(`${b} é divisível por ${a}`)
+    }else{
+        console.log(`${b} não é divisível por ${a}`)
+    }
+    console.log(`A diferençã entre eles é ${diferenca}`)
+}
+
+operacoes(15, 30)
+
+
+
+*/
