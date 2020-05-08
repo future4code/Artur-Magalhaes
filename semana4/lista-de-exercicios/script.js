@@ -133,3 +133,58 @@ const alerta = () => {
 
 alerta()
 */
+
+//#####################################
+
+/*Objetos
+1.  Arrays são listas encadeadas indexadas.
+    Objetos são estruturas com elementes que representam coisas do mundo real.
+
+
+2.
+function criaRetangulo(lado1, lado2){
+    const perimetroRetangulo = 2 * (lado1 + lado2);
+    const areaRetangulo = lado1 * lado2;
+
+    const obj = {
+        largura: lado1,
+        altura: lado2,
+        perimetro: perimetroRetangulo,
+        area: areaRetangulo
+    }
+
+    return obj
+}
+
+console.log(criaRetangulo(2,4))
+
+
+3.
+const filme = {
+    titulo: 'UM SENHOR ESTAGIÁRIO',
+    ano: '2015',
+    diretor: 'Nancy Meyers',
+    atores: ['Robert De Niro', 'Anne Hathaway', 'Rene Russo']
+}
+
+console.log(`Venha assistir ao filme ${filme.titulo}, de ${filme.ano}, dirigido por ${filme.diretor} e estrelado por ${filme.atores}`);
+
+
+4.
+function anonimizarPessoa(obj){
+    objAnonimo = {
+        ...obj,
+        nome:'Anônimo'
+    }
+    return objAnonimo;
+}
+
+const pessoa = {
+    nome: 'Artur',
+    idade: '24',
+    email: 'artur.marques.95@hotmail.com',
+    endereco: 'Fortaleza'
+}
+
+console.log(anonimizarPessoa(pessoa))
+*/
