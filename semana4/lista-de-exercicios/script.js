@@ -112,7 +112,24 @@ const operacoes = (a, b) => {
 }
 
 operacoes(15, 30)
+*/
+
+//#####################################
+
+/*Funções
+1.
+function recebeArray(array){
+    array.sort();
+    console.log(array[1], array[array.length - 2]);
+}
+const array = [7,6,5,4,3,2]
+recebeArray(array)
 
 
+2.
+const alerta = () => {
+    alert("Hello Futere4");
+}
 
+alerta()
 */
