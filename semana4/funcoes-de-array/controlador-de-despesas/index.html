@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <title>Controla Dinheiro</title>
+</head>
+<body>
+  <div id="container">
+    <div id="formulario">
+      <label>Valor: </label>
+      <input id="ipt-valor" type="number">
+      <label>Tipo da despesa: </label>
+      <select id="ipt-tipo">
+          <option value="Despesa de Casa">Despesas de Casa</option>
+          <option value="Despesa de festa">Despesas de Festas</option>
+          <option value="Outros">Outros</option>
+      </select>
+      <textarea id="desc"></textarea>
+      <button onclick="dadosCadastro()">Cadastrar Despesa</button>
+    </div>
+
+    <div id="sec2">
+      <label>Tipo da despesa: </label>
+      <select id="select-tipo">
+          <option value="Despesa de Casa">Despesas de Casa</option>
+          <option value="Despesa de festa">Despesas de Festas</option>
+          <option value="Outros">Outros</option>
+      </select>
+      <label>Valor Mínimo: </label>
+      <input id="ipt-valor-min" type="number">
+      <label>Valor Máximo: </label>
+      <input id="ipt-valor-max" type="number">
+      <button onclick="filtar()">Listar</button>
+
+      <table id="lista-completa">
+      </table>
+    </div>
+
+    <div id="extrato">
+      <button onclick="exibirExtrato()">Extrato</button>
+      <table id="lista-extrato">
+      </table>
+    </div>
+  </div>
+</body>
+</html>
