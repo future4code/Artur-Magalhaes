@@ -7,7 +7,6 @@ export class SecaoComentario extends Component {
 	}
 
 	onChangeComentario() {
-
 	}
 
 	render() {
