@@ -1,8 +1,26 @@
 import React from 'react';
-import './App.css';
+import styled from 'styled-components'
 import Post from './components/Post/Post';
 
+const DivPrincipal = styled.div `
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  `
+
+const Input = styled.input `
+display: block;
+width: 300px
+`
+
+const Botao = styled.button `
+display: block;
+width: 304px
+`
+
 class App extends React.Component {
+  
   state = {
     pessoas: [
       {
@@ -62,29 +80,29 @@ class App extends React.Component {
          />)
     })
     return (
-      <div className={'app-container'}>
+      <DivPrincipal>
         <div>
-          <input 
+          <Input 
           value={this.state.valorInputNome}
           onChange={this.onChangeInputNome}
           placeholder={"usuário"}
           />
-          <input 
+          <Input 
           value={this.state.valorInputFotoUsuario}
           onChange={this.onChangeInputFotoUsuario}
-          placeholder={"imagem do usuário"}
+          placeholder={"URL imagem do usuário"}
           />
-          <input 
+          <Input 
           value={this.state.valorInputPost}
           onChange={this.onChangeInputPost}
-          placeholder={"post"}
+          placeholder={"URL imagem do post"}
           />
-          <button onClick={this.onClickAddPost}>Postar</button>
+          <Botao onClick={this.onClickAddPost}>Postar</Botao>
         </div>
         <div>
           {listaDeContas}
         </div>
-      </div>
+      </DivPrincipal>
     );
   }
 }
