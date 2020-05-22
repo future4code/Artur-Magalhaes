@@ -85,6 +85,17 @@ class App extends React.Component {
     })
   }
 
+  deleteTarefa = (id) => {
+    const deleteTarefa = this.state.tarefas.filter(tarefa => {
+      if(tarefa.id !== id){
+        return tarefa
+      }
+    })
+    this.setState({
+      tarefas: deleteTarefa
+    })
+  }
+
   onChangeFilter = (event) => {
     this.setState({
       filter: event.target.value
@@ -108,7 +119,13 @@ class App extends React.Component {
       <div className="App">
         <h1>Lista de tarefas</h1>
         <InputsContainer>
-          <input value={this.state.inputValue} onChange={this.onChangeInput}/>
+          <input value={this.state.inputValue} 
+          onChange={this.onChangeInput}
+          onKeyPress={e => {
+            if(e.key === 'Enter'){
+              this.criaTarefa()
+            }
+          }}/>
           <button onClick={this.criaTarefa}>Adicionar</button>
         </InputsContainer>
         <br/>
@@ -127,6 +144,7 @@ class App extends React.Component {
               <Tarefa
                 completa={tarefa.completa}
                 onClick={() => this.selectTarefa(tarefa.id)}
+                onDoubleClick={() => this.deleteTarefa(tarefa.id)}
               >
                 {tarefa.texto}
               </Tarefa>
