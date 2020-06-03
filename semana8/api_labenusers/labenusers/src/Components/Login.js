@@ -73,7 +73,7 @@ class Login extends React.Component{
                 </div>
                 <div>
                     <Label>Email: </Label>
-                    <Input type='text' 
+                    <Input type='email' 
                         onChange={this.onChangeinputEmail} 
                         value={this.state.email}/>
                 </div>

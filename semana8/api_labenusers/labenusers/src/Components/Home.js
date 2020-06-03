@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import style from 'styled-components'
+import User from './User'
 
 const DivContent = style.div`
     border: 1px solid;
@@ -55,19 +56,39 @@ class Home extends React.Component{
     }
 
     deleteUser = (id) => {
-      axios
-        .delete(`https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${id}`, 
-            axiosConfig
-        ).then (response => {
-            console.log(response)
-            window.alert('Usuário deletado com sucesso. :)')
-            this.showUsers()
-        }).catch (erro => {
-            console.log(erro)
-        })
+      const confirm = window.confirm('Tem certeza que deseja deletar o usuário?')
+      if(confirm){
+        axios
+            .delete(`https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${id}`, 
+                axiosConfig
+            ).then (response => {
+                console.log(response)
+                window.alert('Usuário deletado com sucesso.')
+                this.showUsers()
+            }).catch (erro => {
+                console.log(erro)
+            })
+      } else {
+        window.alert('Usuário não foi deletado. :)')
+      }
+    }
+
+    detailUser = (idUser) => {
+        axios
+          .get(`https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${idUser}`, 
+              axiosConfig
+          ).then (response => {
+              console.log(idUser)
+              this.setState({
+                  id: idUser
+              })
+          }).catch (erro => {
+              console.log(erro)
+          })
     }
 
     render() {
+
         return(
         <DivContent>
             <h1>Usuários Cadastrados</h1>
@@ -77,7 +98,7 @@ class Home extends React.Component{
             {this.state.users.map(user => {
                 return (
                   <Li key={user.id}>
-                    <DivList>{user.name}</DivList>
+                    <DivList onClick={() => this.detailUser(user.id)}>{user.name}</DivList>
                     <DivList>
                         <Button onClick={() => this.deleteUser(user.id)}>
                             X

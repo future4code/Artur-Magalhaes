@@ -1,31 +1,56 @@
 import React from 'react';
-import Login from './Components/Login'
-import Home from './Components/Home'
+import axios from 'axios';
+import Login from './Components/Login';
+import Home from './Components/Home';
+import User from './Components/User';
+
+const axiosConfig = {
+  headers: {
+      Authorization: 'artur-magalhaes-mello'
+  }
+}
 
 class App extends React.Component {
   state = {
-    page: true
+    page: 'SingUp',
+    pagesHome: true,
+    id: 0,
   }
 
+  singUpPage = () => {
+    this.setState({
+      page: 'SingUp'
+    })
+  }
+  homePage = () => {
+    this.setState({
+      page: 'homePage'
+    })
+  }
   changePage = () => {
     this.setState({
-      page: !this.state.page
+      pagesHome: !this.state.pagesHome
+    })
+  }
+  changeId = (idUser) => {
+    this.setState({
+      id: idUser
     })
   }
 
   render() {
-    if(this.state.page){
+    if(this.state.page === 'SingUp'){
       return(
         <div>
-          <button onClick={this.changePage}>Lista de usuários</button>
+          <button onClick={this.homePage}>Lista de usuários</button>
           <Login/>
         </div>
         )
-    } else {
+    } else if (this.state.page === 'homePage') {
       return(
         <div>
-          <button onClick={this.changePage}>Página de cadastro</button>
-          <Home/>
+          <button onClick={this.singUpPage}>Página de cadastro</button>
+          {this.state.pagesHome ? <Home idUser={this.state.id}/> : <User />}
         </div>
       )
     }
