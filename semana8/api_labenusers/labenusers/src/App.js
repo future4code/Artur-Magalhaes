@@ -13,30 +13,30 @@ const Div = style.div`
 
 class App extends React.Component {
   state = {
-    login: true
+    page: true
   }
 
-  alterarConteudo = () => {
+  changePage = () => {
     this.setState({
-      login: !this.state.login
+      page: !this.state.page
     })
   }
 
   render() {
-    if(this.state.login){
+    if(this.state.page){
       return(
         <>
-          <button onClick={this.alterarConteudo}>Lista de usuários</button>
+          <button onClick={this.changePage}>Lista de usuários</button>
           <Div>
-            <Login></Login>
+            <Login/>
           </Div>
         </>
         )
     } else {
       return(
         <div>
-          <button onClick={this.alterarConteudo}>Página de cadastro</button>
-          <Home></Home>
+          <button onClick={this.changePage}>Página de cadastro</button>
+          <Home/>
         </div>
       )
     }

@@ -1,6 +1,12 @@
 import React from 'react'
 import axios from 'axios'
 
+const axiosConfig = {
+    headers: {
+        Authorization: 'artur-magalhaes-mello'
+    }
+}
+
 class Home extends React.Component{
     state = {
         users: [],
@@ -9,19 +15,12 @@ class Home extends React.Component{
     componentDidMount = () => {
         this.showUsers()
     }
-    
-    componentDidUpdate = () => {
-        this.showUsers()
-    }
 
     showUsers = () => {
       axios
         .get('https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users', 
-        {
-            headers: {
-                Authorization: 'artur-magalhaes-mello'
-            }
-        }).then (response => {
+            axiosConfig
+        ).then (response => {
             console.log(response.data)
             this.setState({
                 users: response.data,
@@ -34,13 +33,11 @@ class Home extends React.Component{
     deleteUser = (id) => {
       axios
         .delete(`https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${id}`, 
-        {
-            headers: {
-                Authorization: 'artur-magalhaes-mello'
-            },
-        }).then (response => {
+            axiosConfig
+        ).then (response => {
             console.log(response)
             window.alert('Usuário deletado com sucesso. :)')
+            this.showUsers()
         }).catch (erro => {
             console.log(erro)
         })

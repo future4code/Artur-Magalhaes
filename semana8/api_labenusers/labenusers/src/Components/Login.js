@@ -11,6 +11,11 @@ const Input = style.input`
     width: 270px;
 `
 
+const axiosConfig = {
+    headers: {
+        Authorization: 'artur-magalhaes-mello'
+    }
+}
 
 class Login extends React.Component{
     state = {
@@ -24,12 +29,10 @@ class Login extends React.Component{
             email: this.state.email,
         }
 
-        axios.post('https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users', data,
-        {
-            headers: {
-                Authorization: 'artur-magalhaes-mello'
-            }
-        }).then (response => {
+        axios.post('https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users', 
+            data,
+            axiosConfig,
+        ).then (response => {
             window.alert('Usuário salvo com sucesso!');
             this.setState({
                 name: '',
