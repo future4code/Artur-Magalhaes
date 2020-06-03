@@ -1,15 +1,6 @@
 import React from 'react';
 import Login from './Components/Login'
 import Home from './Components/Home'
-import style from 'styled-components'
-
-const Div = style.div`
-  display: block;
-  width: 20%;
-  margin: auto;
-  padding: 50px;
-  border: 1px solid;
-`
 
 class App extends React.Component {
   state = {
@@ -25,12 +16,10 @@ class App extends React.Component {
   render() {
     if(this.state.page){
       return(
-        <>
+        <div>
           <button onClick={this.changePage}>Lista de usuários</button>
-          <Div>
-            <Login/>
-          </Div>
-        </>
+          <Login/>
+        </div>
         )
     } else {
       return(

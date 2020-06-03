@@ -2,6 +2,13 @@ import React from 'react'
 import axios from 'axios'
 import style from 'styled-components'
 
+const Div = style.div`
+  display: block;
+  width: 20%;
+  margin: auto;
+  padding: 50px;
+  border: 1px solid;
+`
 const Label = style.label`
     font-size: 18px;
 `
@@ -57,7 +64,7 @@ class Login extends React.Component{
 
     render(){
         return(
-            <>
+            <Div>
                 <div>
                     <Label>Nome: </Label>
                     <Input type='text' 
@@ -71,7 +78,7 @@ class Login extends React.Component{
                         value={this.state.email}/>
                 </div>
                 <button onClick={this.registerUser}>Cadastrar</button>
-            </>
+            </Div>
         )
     }
 }
