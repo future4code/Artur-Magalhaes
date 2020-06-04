@@ -38,7 +38,7 @@ class App extends React.Component {
           <ul>
             {this.state.historicalEvents.map(event => {
               return (
-                <li key={event.id} onClick={() => this.onClickDetails(event)}>{event.title} - {event.event_date_utc}</li>
+                <li key={event.id} onClick={() => this.onClickDetails(event)}><strong>{event.title}</strong> - {event.event_date_utc}</li>
                 )
             })}
           </ul>
@@ -50,7 +50,7 @@ class App extends React.Component {
             <Details event={this.state.event}/>
           </div>)
       }
-    } 
+    }
 }
 
 export default App;
