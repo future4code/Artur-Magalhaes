@@ -35,12 +35,22 @@ const axiosConfig = {
 class Home extends React.Component{
     state = {
         users: [],
+        page: true,
+        user: '',
+    }
+
+    changePage = () =>{
+        this.setState({
+            page: !this.state.page
+        })
     }
 
     componentDidMount = () => {
         this.showUsers()
     }
-
+    componentDidUpdate = () => {
+        this.showUsers()
+    }
     showUsers = () => {
       axios
         .get('https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users', 
@@ -78,9 +88,10 @@ class Home extends React.Component{
           .get(`https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${idUser}`, 
               axiosConfig
           ).then (response => {
-              console.log(idUser)
+              console.log(response.data)
               this.setState({
-                  id: idUser
+                page: false,
+                user: response.data,
               })
           }).catch (erro => {
               console.log(erro)
@@ -88,28 +99,36 @@ class Home extends React.Component{
     }
 
     render() {
-
-        return(
-        <DivContent>
-            <h1>Usuários Cadastrados</h1>
-            <hr />
-            <Ul>
-            {this.state.users.length == 0 && <div>Carregando...</div>}
-            {this.state.users.map(user => {
-                return (
-                  <Li key={user.id}>
-                    <DivList onClick={() => this.detailUser(user.id)}>{user.name}</DivList>
-                    <DivList>
-                        <Button onClick={() => this.deleteUser(user.id)}>
-                            X
-                        </Button>
-                    </DivList>
-                  </Li>
-                )
-            })}
-            </Ul>
-        </DivContent>
-        )
+        if(this.state.page){
+            return(
+            <DivContent>
+                <h1>Usuários Cadastrados</h1>
+                <hr />
+                <Ul>
+                {this.state.users.length == 0 && <div>Carregando...</div>}
+                {this.state.users.map(user => {
+                    return (
+                    <Li key={user.id}>
+                        <DivList onClick={() => this.detailUser(user.id)}>{user.name}</DivList>
+                        <DivList>
+                            <Button onClick={() => this.deleteUser(user.id)}>
+                                X
+                            </Button>
+                        </DivList>
+                    </Li>
+                    )
+                })}
+                </Ul>
+            </DivContent>
+            )
+        } else {
+            return(
+                <div>
+                    <button onClick={this.changePage}>Voltar</button>
+                    <User user={this.state.user}/>
+                </div>
+            )
+        }
     }
 }
 

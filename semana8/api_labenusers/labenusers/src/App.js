@@ -50,7 +50,7 @@ class App extends React.Component {
       return(
         <div>
           <button onClick={this.singUpPage}>Página de cadastro</button>
-          {this.state.pagesHome ? <Home idUser={this.state.id}/> : <User />}
+          {this.state.pagesHome ? <Home /> : <User idUser={this.state.id}/>}
         </div>
       )
     }
