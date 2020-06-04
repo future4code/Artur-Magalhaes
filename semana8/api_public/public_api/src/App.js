@@ -1,13 +1,13 @@
 import React from 'react';
 import axios from 'axios';
 import Details from './components/Details';
-import CEP from './components/Song';
+import Song from './components/Song';
 
 class App extends React.Component {
   state = {
     historicalEvents: [],
     event: [],
-    page: 'song',
+    page: 'historical',
   }
   componentDidMount = () => {
     this.getHistory()
@@ -36,9 +36,9 @@ class App extends React.Component {
     })
   }
 
-  onClickBuscaCEP = () => {
+  onClickBuscaSong = () => {
     this.setState({
-      page: 'cep'
+      page: 'song'
     })
   }
 
@@ -47,7 +47,7 @@ class App extends React.Component {
       case 'historical':
         return (
           <div className="App">
-            <button onClick={this.onClickBuscaCEP}>Buscar Musica</button>
+            <button onClick={this.onClickBuscaSong}>Buscar Musica</button>
             <h1>Histórico</h1>
             <hr/>
             <ul>
@@ -69,7 +69,7 @@ class App extends React.Component {
         return(
           <div>
             <button onClick={this.onClickHistorical}>SpaceX</button>
-            <CEP/>
+            <Song />
           </div>
         )
       }
