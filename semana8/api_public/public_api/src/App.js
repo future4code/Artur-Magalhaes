@@ -1,12 +1,13 @@
 import React from 'react';
 import axios from 'axios';
 import Details from './components/Details';
+import CEP from './components/Song';
 
 class App extends React.Component {
   state = {
     historicalEvents: [],
-    idEvent: [],
-    page: true,
+    event: [],
+    page: 'song',
   }
   componentDidMount = () => {
     this.getHistory()
@@ -24,31 +25,53 @@ class App extends React.Component {
 
   onClickDetails = (event) => {
     this.setState({
-      page: !this.state.page,
+      page: 'detail',
       event: event,
     })
   }
 
+  onClickHistorical = () => {
+    this.setState({
+      page: 'historical',
+    })
+  }
+
+  onClickBuscaCEP = () => {
+    this.setState({
+      page: 'cep'
+    })
+  }
+
   render(){
-    if(this.state.page) {
-      return (
-        <div className="App">
-          <h1>Histórico</h1>
-          <hr/>
-          <ul>
-            {this.state.historicalEvents.map(event => {
-              return (
-                <li key={event.id} onClick={() => this.onClickDetails(event)}><strong>{event.title}</strong> - {event.event_date_utc}</li>
-                )
-            })}
-          </ul>
-        </div>
-      )} else {
+    switch(this.state.page) {
+      case 'historical':
+        return (
+          <div className="App">
+            <button onClick={this.onClickBuscaCEP}>Buscar Musica</button>
+            <h1>Histórico</h1>
+            <hr/>
+            <ul>
+              {this.state.historicalEvents.map(event => {
+                return (
+                  <li key={event.id} onClick={() => this.onClickDetails(event)}><strong>{event.title}</strong> - {event.event_date_utc}</li>
+                  )
+              })}
+            </ul>
+          </div>
+        )
+      case 'detail':
         return (
           <div>
-            <button onClick={this.onClickDetails}>Voltar</button>
+            <button onClick={this.onClickHistorical}>Voltar</button>
             <Details event={this.state.event}/>
           </div>)
+      case 'song':
+        return(
+          <div>
+            <button onClick={this.onClickHistorical}>SpaceX</button>
+            <CEP/>
+          </div>
+        )
       }
     }
 }
