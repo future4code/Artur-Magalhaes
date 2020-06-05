@@ -1,5 +1,5 @@
 import React from 'react'
-import style from 'styled-components'
+import { DivAddMusic, H3, H2, DivContent, Input, Button, DivListMusic, DataList, AudioMedia } from './style'
 import axios from 'axios'
 
 let music = ''
@@ -61,21 +61,28 @@ function Playlists(props) {
   const list = listMusic.map(song=> {
       return (
         <div>
-          <li key={song.id}>{song.name} - {song.name}</li>
-          <audio src={`${song.url}`} controls></audio>
+            <DataList key={song.id}>{song.name} - {song.name}</DataList>
+            <AudioMedia src={`${song.url}`} controls />
         </div>)
   })
   return(
     <div>
-      {playlist.name}
-      <div>
-        <input placeholder='Música' onChange={inputMusic} value={music}/>
-        <input placeholder='Artista' onChange={inputArtist} value={artist}/>
-        <input placeholder='URL' onChange={inputURL} value={url}/>
-        <button onClick={addTrackToPlaylist}>Adicionar</button>
-      </div>
-      {getPlaylistTracks(playlist.id)}
-      {list}
+      <H2>{playlist.name.toUpperCase()}</H2>
+      <DivContent>
+        <DivAddMusic>
+            <H3>Adicionar Música </H3>
+                <Input placeholder='Música' onChange={inputMusic} value={music}/>
+                <Input placeholder='Artista' onChange={inputArtist} value={artist}/>
+                <Input placeholder='URL' onChange={inputURL} value={url}/>
+                <Button onClick={addTrackToPlaylist}>ADICIONAR</Button>
+        </DivAddMusic>
+        <DivListMusic>
+            {getPlaylistTracks(playlist.id)}
+            <ol>
+                {list}
+            </ol>
+        </DivListMusic>
+      </DivContent>
     </div>)
 }
 
