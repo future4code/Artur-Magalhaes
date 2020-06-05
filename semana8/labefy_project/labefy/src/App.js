@@ -79,6 +79,8 @@ class App extends React.Component {
     })
   }
 
+
+
   pageHome = () => {
     this.setState({
       page: 'home'

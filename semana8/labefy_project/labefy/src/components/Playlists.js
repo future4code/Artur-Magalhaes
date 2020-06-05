@@ -5,6 +5,7 @@ import axios from 'axios'
 let music = ''
 let artist = ''
 let url = ''
+let listMusic = []
 
 const axiosConfig = {
     headers: {
@@ -27,6 +28,18 @@ const inputURL = (event) => {
 function Playlists(props) {
 
   const { playlist } = props
+  
+  const getPlaylistTracks = (id) => {
+    axios.get(`https://us-central1-labenu-apis.cloudfunctions.net/labefy/playlists/${id}/tracks`,
+      axiosConfig)
+      .then(response => {
+        listMusic = response.data.result.tracks
+        console.log(listMusic)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
 
   const addTrackToPlaylist = () => {
     window.alert('Música Salva')
@@ -45,6 +58,13 @@ function Playlists(props) {
       })
   }
 
+  const list = listMusic.map(song=> {
+      return (
+        <div>
+          <li key={song.id}>{song.name} - {song.name}</li>
+          <audio src={`${song.url}`} controls></audio>
+        </div>)
+  })
   return(
     <div>
       {playlist.name}
@@ -54,6 +74,8 @@ function Playlists(props) {
         <input placeholder='URL' onChange={inputURL} value={url}/>
         <button onClick={addTrackToPlaylist}>Adicionar</button>
       </div>
+      {getPlaylistTracks(playlist.id)}
+      {list}
     </div>)
 }
 
