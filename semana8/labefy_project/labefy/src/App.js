@@ -92,6 +92,11 @@ class App extends React.Component {
     })
   }
 
+  onChangeAddUrl = (event) => {
+    this.setState({
+    })
+  }
+
   render() {
     switch (this.state.page) {
       case 'home':
