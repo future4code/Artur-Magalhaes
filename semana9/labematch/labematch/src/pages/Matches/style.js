@@ -10,6 +10,11 @@ export const ButtonMain = styled.button`
     margin: 10px;
 `
 
+export const DivScreenRoll = styled.div`
+    overflow: auto;
+    height: 366px;
+`
+
 export const DivScreen = styled.div`
     display: grid;
     grid-template-columns: repeat(4, 1fr);

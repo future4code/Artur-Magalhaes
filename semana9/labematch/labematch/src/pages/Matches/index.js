@@ -54,6 +54,7 @@ export default function Matches() {
           </Link>
           <DeleteForeverIcon cursor="pointer" className={classes.delete} onClick={clearMatches} />
         </DivHeaderMatches>
+        <S.DivScreenRoll>
         {persons.length > 0 ? persons.map((person) => (
           <S.DivScreen>
             <S.DivImage>
@@ -66,6 +67,7 @@ export default function Matches() {
             Não tem Matches!!
           </S.DivZeroMatches>
         }
+        </S.DivScreenRoll>
       </DivContainer>
     </>)
     
