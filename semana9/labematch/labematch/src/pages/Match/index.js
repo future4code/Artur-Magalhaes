@@ -4,11 +4,30 @@ import { Link } from 'react-router-dom';
 import api from '../../service/api'
 
 import * as S from './style'
-import { DivContainer, DivButtons, DivHeader } from '../../style/globalStyle'
+import { DivContainer, DivButtons, DivHeaderMatch } from '../../style/globalStyle'
+
+import { makeStyles } from '@material-ui/core/styles';
+import BlurOnIcon from '@material-ui/icons/BlurOn';
+import GroupIcon from '@material-ui/icons/Group';
+import CancelIcon from '@material-ui/icons/Cancel';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+
+const useStyle = makeStyles((theme) => ({
+  home: {
+    margin: '10px',
+    color: 'black',
+  },
+  buttonMatch: {
+    height: '2em',
+    width: '2em',
+    margin: '5px auto 10px auto',
+  }
+}))
 
 export default function Match() {
   const [person, setPerson] = useState({});
-
+  const classes = useStyle();
+  
   const getApi = () => {
     api.get('person')
       .then(response => {
@@ -54,15 +73,23 @@ export default function Match() {
 
   return(
     <DivContainer>
-      <DivHeader>
+      <DivHeaderMatch>
         <Link to="/matches">
-          <S.ButtonMatches>M</S.ButtonMatches>
+          <GroupIcon className={classes.home}/>
         </Link>
-      </DivHeader>
-      <S.ImagePerfil src={person.photo}/>
+      </DivHeaderMatch>
+      {console.log(person)}
+      {person === null && (
+        <S.DivZeroPerson>
+          <BlurOnIcon/>
+        </S.DivZeroPerson>)
+      }
+      {person !== null && 
+        <S.ImagePerfil src={person.photo}/>
+      }
       <DivButtons>
-        <S.ButtonMatch onClick={() => onClickMatchFalse(person.id)}>X</S.ButtonMatch>
-        <S.ButtonMatch onClick={() => onClickMatchTrue(person.id)}>S2</S.ButtonMatch>
+        <CancelIcon cursor="pointer" color="secondary" viewBox="0 0 24 22" className={classes.buttonMatch} onClick={() => onClickMatchFalse(person.id)}/>
+        <FavoriteIcon cursor="pointer" viewBox="0 0 24 20" className={classes.buttonMatch} onClick={() => onClickMatchTrue(person.id)}/>
       </DivButtons>
     </DivContainer>
     )

@@ -4,10 +4,25 @@ import { Link } from 'react-router-dom';
 import api from '../../service/api'
 
 import * as S from './style'
-import { DivContainer, DivButtons, DivHeader } from '../../style/globalStyle'
+import { DivContainer, DivHeaderMatches } from '../../style/globalStyle'
+
+import { makeStyles } from '@material-ui/core/styles';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import HomeIcon from '@material-ui/icons/Home';
+
+const useStyle = makeStyles((theme) => ({
+  home: {
+    margin: '10px',
+    color: 'black',
+  },
+  delete: {
+    margin: '10px',
+  }
+}))
 
 export default function Matches() {
   const [persons, setPersons] = useState([])
+  const classes = useStyle()
 
   useEffect(() => {
     api.get('matches')
@@ -33,14 +48,17 @@ export default function Matches() {
   return(
     <>
       <DivContainer>
-        <DivHeader>
+        <DivHeaderMatches>
           <Link to="/">
-            <S.ButtonMain>M</S.ButtonMain>
+              <HomeIcon className={classes.home} />
           </Link>
-        </DivHeader>
+          <DeleteForeverIcon cursor="pointer" className={classes.delete} onClick={clearMatches} />
+        </DivHeaderMatches>
         {persons.length > 0 ? persons.map((person) => (
           <S.DivScreen>
-            <S.DivImage><S.ImgPerfil key={person.id} src={person.photo} /></S.DivImage>
+            <S.DivImage>
+              <S.ImgPerfil key={person.id} src={person.photo} />
+            </S.DivImage>
             <S.DivName>{person.name}</S.DivName>
           </S.DivScreen>
         )) : 
@@ -49,7 +67,6 @@ export default function Matches() {
           </S.DivZeroMatches>
         }
       </DivContainer>
-      <button onClick={clearMatches}>Clear</button>
     </>)
     
 }

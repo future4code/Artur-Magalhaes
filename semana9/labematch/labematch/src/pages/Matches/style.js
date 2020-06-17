@@ -22,7 +22,7 @@ export const DivZeroMatches = styled.div`
     margin: auto;
     justify-content: center;
     align-items: center;
-    height: 300px;
+    height: 365px;
 `
 
 export const DivImage = styled.div`

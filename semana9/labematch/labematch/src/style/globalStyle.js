@@ -12,8 +12,14 @@ export const DivButtons = styled.div`
     grid-template-columns: repeat(2, 1fr);  
 `
 
-export const DivHeader = styled.div`
+export const DivHeaderMatch = styled.div`
     display: flex;
     flex-direction: row-reverse;
+    border-bottom: 1px solid;
+`
+
+export const DivHeaderMatches = styled.div`
+    display: flex;
+    justify-content: space-between;
     border-bottom: 1px solid;
 `
