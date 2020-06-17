@@ -10,12 +10,15 @@ export const DivContainer = styled.div`
 export const DivButtons = styled.div`
     display: grid;
     grid-template-columns: repeat(2, 1fr);  
+    background-color: #EEE;
+    border-top: 1px solid;
 `
 
 export const DivHeaderMatch = styled.div`
     display: flex;
     flex-direction: row-reverse;
     border-bottom: 1px solid;
+    background-color: #EEE;
 `
 
 export const DivHeaderMatches = styled.div`

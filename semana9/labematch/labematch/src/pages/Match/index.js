@@ -84,13 +84,16 @@ export default function Match() {
           <BlurOnIcon/>
         </S.DivZeroPerson>)
       }
-      {person !== null && 
-        <S.ImagePerfil src={person.photo}/>
+      {person !== null && (
+        <div>
+          <S.ImagePerfil src={person.photo}/>
+          <DivButtons>
+            <CancelIcon cursor="pointer" color="secondary" viewBox="0 0 24 22" className={classes.buttonMatch} onClick={() => onClickMatchFalse(person.id)}/>
+            <FavoriteIcon cursor="pointer" viewBox="0 0 24 20" className={classes.buttonMatch} onClick={() => onClickMatchTrue(person.id)}/>
+          </DivButtons>
+        </div>)
       }
-      <DivButtons>
-        <CancelIcon cursor="pointer" color="secondary" viewBox="0 0 24 22" className={classes.buttonMatch} onClick={() => onClickMatchFalse(person.id)}/>
-        <FavoriteIcon cursor="pointer" viewBox="0 0 24 20" className={classes.buttonMatch} onClick={() => onClickMatchTrue(person.id)}/>
-      </DivButtons>
+      
     </DivContainer>
     )
 }
