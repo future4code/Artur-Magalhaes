@@ -16,12 +16,21 @@ export default function Matches() {
       })
   },[])
 
-  
+  const clearMatches = () => {
+    api.put('clear')
+      .then(response => {
+        setPersons([])
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
 
   return(<>
     {persons.map((person) => (
-        <S.ImgPerfil src={person.photo} />
+        <S.ImgPerfil key={person.id} src={person.photo} />
     ))}
+    <button onClick={clearMatches}>Clear</button>
     </>)
     
 }
