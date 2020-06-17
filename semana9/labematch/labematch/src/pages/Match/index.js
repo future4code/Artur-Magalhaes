@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import api from '../../service/api'
 
 import * as S from './style'
+import { DivContainer, DivButtons, DivHeader } from '../../style/globalStyle'
 
 export default function Match() {
   const [person, setPerson] = useState({});
@@ -51,10 +53,17 @@ export default function Match() {
   }
 
   return(
-    <>
+    <DivContainer>
+      <DivHeader>
+        <Link to="/matches">
+          <S.ButtonMatches>M</S.ButtonMatches>
+        </Link>
+      </DivHeader>
       <S.ImagePerfil src={person.photo}/>
-      <button onClick={() => onClickMatchFalse(person.id)}>X</button>
-      <button onClick={() => onClickMatchTrue(person.id)}>S2</button>
-    </>
+      <DivButtons>
+        <S.ButtonMatch onClick={() => onClickMatchFalse(person.id)}>X</S.ButtonMatch>
+        <S.ButtonMatch onClick={() => onClickMatchTrue(person.id)}>S2</S.ButtonMatch>
+      </DivButtons>
+    </DivContainer>
     )
 }
