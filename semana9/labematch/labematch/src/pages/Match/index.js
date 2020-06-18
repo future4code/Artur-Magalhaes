@@ -27,31 +27,27 @@ const useStyle = makeStyles((theme) => ({
 export default function Match() {
   const [person, setPerson] = useState({});
   const classes = useStyle();
-  
-  const getApi = () => {
-    api.get('person')
-      .then(response => {
-        console.log(response.data.profile)
-        setPerson(response.data.profile)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }
 
   useEffect(() => {
     getApi()
   },[])
 
-  const choosePerson = (data) => {
+  const getApi = async () => {
+    try{
+      const response = await api.get('person')
+      setPerson(response.data.profile)
+    } catch(err) {
+        console.log(err)
+      }
+  }
+  
+  const choosePerson = async (data) => {
     getApi()
-    api.post('choose-person', data)
-    .then(response => {
-      console.log(response.data)
-    })
-    .catch(err => {
+    try{
+      const response = await api.post('choose-person', data)
+    } catch(err) {
       console.log(err)
-    })
+    }
   }
 
   const onClickMatchTrue = (id) => {
@@ -59,7 +55,6 @@ export default function Match() {
       "id": id,
       "choice": true,
     }
-    console.log(data)
     choosePerson(data)
   }
 
@@ -78,7 +73,6 @@ export default function Match() {
           <GroupIcon className={classes.home}/>
         </Link>
       </DivHeaderMatch>
-      {console.log(person)}
       {person === null && (
         <S.DivZeroPerson>
           <BlurOnIcon/>
@@ -89,7 +83,7 @@ export default function Match() {
           <S.ImagePerfil src={person.photo}/>
           <DivButtons>
             <CancelIcon cursor="pointer" color="secondary" viewBox="0 0 24 22" className={classes.buttonMatch} onClick={() => onClickMatchFalse(person.id)}/>
-            <FavoriteIcon cursor="pointer" viewBox="0 0 24 20" className={classes.buttonMatch} onClick={() => onClickMatchTrue(person.id)}/>
+            <FavoriteIcon cursor="pointer" color="primary" viewBox="0 0 24 20" className={classes.buttonMatch} onClick={() => onClickMatchTrue(person.id)}/>
           </DivButtons>
         </div>)
       }

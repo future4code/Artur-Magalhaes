@@ -13,6 +13,7 @@ export const ButtonMain = styled.button`
 export const DivScreenRoll = styled.div`
     overflow: auto;
     height: 366px;
+    background-color: #F7F7F7;
 `
 
 export const DivScreen = styled.div`
@@ -28,6 +29,7 @@ export const DivZeroMatches = styled.div`
     justify-content: center;
     align-items: center;
     height: 365px;
+    background-color: #F7F7F7;
 `
 
 export const DivImage = styled.div`

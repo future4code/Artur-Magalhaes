@@ -25,24 +25,25 @@ export default function Matches() {
   const classes = useStyle()
 
   useEffect(() => {
-    api.get('matches')
-      .then(response => {
-          console.log(response.data)
-          setPersons(...persons, response.data.matches)
-      })
-      .catch(err => {
-          console.log(err)
-      })
+      getMatches();
   },[])
 
-  const clearMatches = () => {
-    api.put('clear')
-      .then(response => {
-        setPersons([])
-      })
-      .catch(err => {
+  const getMatches = async () => {
+    try{
+      const response = await api.get('matches')
+      setPersons(...persons, response.data.matches)
+    } catch(err) {
+      console.log(err)
+    }
+  }
+
+  const clearMatches = async () => {
+    try{
+      const response = await api.put('clear')
+      setPersons([])
+    } catch (err) {
         console.log(err)
-      })
+      }
   }
 
   return(
@@ -56,11 +57,11 @@ export default function Matches() {
         </DivHeaderMatches>
         <S.DivScreenRoll>
         {persons.length > 0 ? persons.map((person) => (
-          <S.DivScreen>
+          <S.DivScreen key={person.id}>
             <S.DivImage>
               <S.ImgPerfil key={person.id} src={person.photo} />
             </S.DivImage>
-            <S.DivName>{person.name}</S.DivName>
+            <S.DivName key={person.id}>{person.name}</S.DivName>
           </S.DivScreen>
         )) : 
           <S.DivZeroMatches>
