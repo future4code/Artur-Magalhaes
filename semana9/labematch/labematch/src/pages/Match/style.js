@@ -20,9 +20,8 @@ export const ButtonMatches = styled.button`
 `
 
 export const DivZeroPerson = styled.div`
-    display: grid;
-    margin: auto;
-    justify-content: center;
-    align-items: center;
-    height: 300px;
+    padding-top: 50%;
+    text-align: center;
+    max-height: 300px;
+    background-color: #F7F7F7;
 `

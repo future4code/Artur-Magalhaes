@@ -5,6 +5,7 @@ export const DivContainer = styled.div`
     min-height: 400px;
     margin: auto;
     border: 1px solid;
+    background-color: #F7F7F7
 `
 
 export const DivButtons = styled.div`

@@ -12,6 +12,7 @@ import GroupIcon from '@material-ui/icons/Group';
 import CancelIcon from '@material-ui/icons/Cancel';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
+
 const useStyle = makeStyles((theme) => ({
   home: {
     margin: '10px',
@@ -21,6 +22,19 @@ const useStyle = makeStyles((theme) => ({
     height: '2em',
     width: '2em',
     margin: '5px auto 10px auto',
+  },
+  blurOnIcon: {
+    display: 'block',
+    padding: '0 46%',
+    animation: '$blink .9s infinite'
+  },
+  search: {
+    fontFamily: 'Balsamiq Sans - sans-serif',
+    animation: "$blink .9s infinite"
+  },
+  '@keyframes blink': {
+    from: { opacity: "0" },
+    to: { opacity: "1" }
   }
 }))
 
@@ -75,7 +89,8 @@ export default function Match() {
       </DivHeaderMatch>
       {person === null && (
         <S.DivZeroPerson>
-          <BlurOnIcon/>
+          <BlurOnIcon className={classes.blurOnIcon}/>
+          <text className={classes.search}>PROCURANDO...</text> 
         </S.DivZeroPerson>)
       }
       {person !== null && (
