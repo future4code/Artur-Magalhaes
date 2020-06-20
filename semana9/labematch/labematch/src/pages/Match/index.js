@@ -11,6 +11,7 @@ import BlurOnIcon from '@material-ui/icons/BlurOn';
 import GroupIcon from '@material-ui/icons/Group';
 import CancelIcon from '@material-ui/icons/Cancel';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import { blue } from '@material-ui/core/colors';
 
 
 const useStyle = makeStyles((theme) => ({
@@ -22,6 +23,13 @@ const useStyle = makeStyles((theme) => ({
     height: '2em',
     width: '2em',
     margin: '5px auto 10px auto',
+    '&:hover': {color: '#00F'},
+  },
+  buttonUnMatch: {
+    height: '2em',
+    width: '2em',
+    margin: '5px auto 10px auto',
+    '&:hover': {color: '#F00',},
   },
   blurOnIcon: {
     display: 'block',
@@ -97,7 +105,7 @@ export default function Match() {
         <div>
           <S.ImagePerfil src={person.photo}/>
           <DivButtons>
-            <CancelIcon cursor="pointer" color="secondary" viewBox="0 0 24 22" className={classes.buttonMatch} onClick={() => onClickMatchFalse(person.id)}/>
+            <CancelIcon cursor="pointer" color="secondary" viewBox="0 0 24 22" className={classes.buttonUnMatch} onClick={() => onClickMatchFalse(person.id)}/>
             <FavoriteIcon cursor="pointer" color="primary" viewBox="0 0 24 20" className={classes.buttonMatch} onClick={() => onClickMatchTrue(person.id)}/>
           </DivButtons>
         </div>)
