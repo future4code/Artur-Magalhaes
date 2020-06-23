@@ -13,7 +13,7 @@ export default function Routes() {
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={Home} />
-        <Route path="/apply" exact component={Apply} />
+        <Route path="/apply/:id" exact component={Apply} />
         <Route path="/createtrip" exact component={CreateTrip} />
         <Route path="/detailtrip" exact component={DetailTrip} />
         <Route path="/listtrip" exact component={ListTrip} />
