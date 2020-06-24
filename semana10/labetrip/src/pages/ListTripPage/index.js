@@ -37,11 +37,15 @@ export default function ListTripPage() {
     history.push(`/detailtrip/${id}`);
   }
 
+  const detailTrip = (id) => {
+    history.push(`/detailTrip/${id}`)
+  }
+
   return(<>
     <button onClick={createTrip}>Criar Viagem</button>
     {trips.map(trip => {
       return(
-        <div key={trip.id}>
+        <div key={trip.id} onClick={() => detailTrip(trip.id)}>
           {trip.name} 
           <button onClick={() => deleteTrip(trip.id)}>X</button>
           <button onClick={() => editTrip(trip.id)}>Edit</button>
