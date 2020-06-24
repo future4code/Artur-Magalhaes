@@ -15,7 +15,7 @@ export default function Routes() {
         <Route path="/" exact component={Home} />
         <Route path="/apply/:id" exact component={Apply} />
         <Route path="/createtrip" exact component={CreateTrip} />
-        <Route path="/detailtrip" exact component={DetailTrip} />
+        <Route path="/detailtrip/:id" exact component={DetailTrip} />
         <Route path="/listtrip" exact component={ListTrip} />
         <Route path="/login" exact component={Login} />
       </Switch>
