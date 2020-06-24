@@ -21,6 +21,7 @@ export default function Home() {
   }
 
   return(<>
+    <button onClick={() => history.push('/login')}>Login</button>
     {trips.map((trip) => {
       return(
         <div key={trip.id} onClick={() => history.push(`/apply/${trip.id}`)}>
