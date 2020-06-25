@@ -1,19 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import useInput from '../../hooks/useInput';
+import useForm from '../../hooks/useForm';
 import api from '../../service/api';
 
 export default function CreateTripPage() {
-  const [inputName, handleInputName] = useInput('');
-  const [inputPlanet, handleInputPlanet] = useInput('');
-  const [inputDate, handleInputDate] = useInput('');
-  const [inputDescription, handleInputDescription] = useInput('');
-  const [inputDuration, handleInputDuration] = useInput('');
+  const { form, handleForm } = useForm({
+    name: '',
+    planet: '',
+    date: '',
+    description: '',
+    durationInDays: '',
+  })
 
   const history = useHistory();
 
   const [token, setToken] = useState(localStorage.getItem('token'))
   
+  const handleInputs = event => {
+    const { name, value } = event.target;
+    handleForm(name, value);
+  }
+
   useEffect(() => {
 
     if(token === null){
@@ -22,14 +29,11 @@ export default function CreateTripPage() {
 
   },[token]);
 
-  const createTrip = () => {
-    const data = {
-      name: inputName,
-      planet: inputPlanet,
-      date: inputDate,
-      description: inputDescription,
-      durationInDays: inputDuration,
-    }
+  const createTrip = (event) => {
+    event.preventDefault();
+
+    const data = form
+
     const config = {
       headers: {
         auth: token,
@@ -51,12 +55,48 @@ export default function CreateTripPage() {
 
   return(<>
     <div>CreateTrip</div>
-    <input type="" placeholder="Nome" value={inputName} onChange={handleInputName} />
-    <input type="" placeholder="Planeta" value={inputPlanet} onChange={handleInputPlanet} />
-    <input type="" placeholder="Data" value={inputDate} onChange={handleInputDate} />
-    <input type="" placeholder="Descrição" value={inputDescription} onChange={handleInputDescription} />
-    <input type="" placeholder="Duração (Em dias)" value={inputDuration} onChange={handleInputDuration} />
-    <button onClick={cancel}>Cancelar</button>
-    <button onClick={createTrip}>Criar</button>
+    <form onSubmit={createTrip}>
+      <input
+        name="planet"
+        type="text"
+        placeholder="Planeta"
+        value={form.planet}
+        //Dropdown
+        onChange={handleInputs} 
+        required />
+      <input
+        name="date"
+        type="date" //Data no futuro
+        placeholder="Data"
+        value={form.date}
+        onChange={handleInputs} 
+        required />
+      <input
+        name="name"
+        type="text"
+        placeholder="Nome"
+        value={form.name}
+        onChange={handleInputs} 
+        pattern="[A-Z][a-z \d]{4,}"
+        required />
+      <input
+        name="description"
+        type="text"
+        placeholder="Descrição"
+        value={form.description}
+        onChange={handleInputs} 
+        pattern="[A-Z \d][A-Za-z \d]*{29,}"
+        required />
+      <input
+        name="durationInDays"
+        type="number"
+        min="50"
+        placeholder="Duração (Em dias)"
+        value={form.durationInDays}
+        onChange={handleInputs}
+        required />
+      <button onClick={cancel}>Cancelar</button>
+      <button type="submit">Criar</button>
+    </form>
   </>)
 }

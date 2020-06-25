@@ -1,18 +1,24 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import useInput from '../../hooks/useInput';
+import useForm from '../../hooks/useForm';
 import api from '../../service/api';
 
 export default function LoginPage() {
-  const [inputEmail, handleInputEmail] = useInput('');
-  const [inputPassword, handleInputPassword] = useInput('');
+  const { form, handleForm } = useForm({
+    email: '',
+    password: '',
+  });
+
   const history = useHistory();
   
-  const login = async(email, password) => {
-    const loginData = {
-      email: email,
-      password: password,
-    }
+  const handleInputs = event => {
+    const { name, value } = event.target;
+    handleForm(name, value);
+  }
+
+  const login = async (event) => {
+    event.preventDefault();
+    const loginData = form;
 
     const response = await api.post('login', loginData)
     localStorage.setItem('token', response.data.token);
@@ -20,9 +26,22 @@ export default function LoginPage() {
     
   }
 
-  return(<>
-    <input placeholder='Email' onChange={handleInputEmail} value={inputEmail}/>
-    <input placeholder='Senha' type="password" onChange={handleInputPassword} value={inputPassword}/>
-    <button onClick={() => login(inputEmail, inputPassword)}>Entrar</button>
-  </>)
+  return(
+    <form onSubmit={login}>
+      <input 
+        name="email"
+        value={form.email}
+        placeholder='Email'
+        type='email'
+        onChange={handleInputs}
+        required />
+      <input 
+        name="password"
+        value={form.password}
+        placeholder='Senha'
+        type="password"
+        onChange={handleInputs}
+        required />
+      <button>Entrar</button>
+    </form>)
 }
