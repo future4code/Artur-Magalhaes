@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import useForm from '../../hooks/useForm';
-import api from '../../service/api';
+import { api } from '../../service/api';
 
 export default function CreateTripPage() {
   const { form, handleForm } = useForm({
@@ -15,13 +15,27 @@ export default function CreateTripPage() {
   const history = useHistory();
 
   const [token, setToken] = useState(localStorage.getItem('token'))
-  
+  // Planets list
+  const [planets, setPlanets] = useState([
+    {name: "Mercúrio"}, {name: "Vênus"}, {name: "Terra"}, {name: "Marte"}, {name: "Júpiter"}, {name: "Saturno"}, {name: "Urano"}, {name: "Netuno"}
+  ]);
+  // DateToday
+  const [DateToday, setDateToday] = useState('');
+
   const handleInputs = event => {
     const { name, value } = event.target;
     handleForm(name, value);
   }
 
+  const getDate = () => {
+    const day = new Date().getDate() < 10 ? `0${new Date().getDate()}` : new Date().getDate()
+    const month = new Date().getMonth() < 9 ? `0${new Date().getMonth()+1}` : new Date().getMonth()
+    const dateNow = `${new Date().getFullYear()}-${month}-${day}`
+    setDateToday(dateNow)
+  }
+
   useEffect(() => {
+    getDate();
 
     if(token === null){
       history.push('/login');
@@ -31,7 +45,7 @@ export default function CreateTripPage() {
 
   const createTrip = (event) => {
     event.preventDefault();
-
+    console.log(form)
     const data = form
 
     const config = {
@@ -56,17 +70,16 @@ export default function CreateTripPage() {
   return(<>
     <div>CreateTrip</div>
     <form onSubmit={createTrip}>
-      <input
-        name="planet"
-        type="text"
-        placeholder="Planeta"
-        value={form.planet}
-        //Dropdown
-        onChange={handleInputs} 
-        required />
+      <select name="planet" value={form.planet} onChange={handleInputs} required>
+        <option value=""></option>
+        {planets.map(planet => {
+          return <option key={planet.name} value={planet.name}>{planet.name}</option>
+        })}
+      </select>
       <input
         name="date"
         type="date" //Data no futuro
+        min={DateToday}
         placeholder="Data"
         value={form.date}
         onChange={handleInputs} 

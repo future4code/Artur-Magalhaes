@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import useForm from '../../hooks/useForm';
-import api from '../../service/api';
+import { api, apiCountry } from '../../service/api';
 
 export default function ApplyTripPage() {
+  const [countries, setCountries] = useState([])
   const params = useParams();
   const history = useHistory();
 
@@ -19,6 +20,12 @@ export default function ApplyTripPage() {
     const { name, value } = event.target;
     handleForm(name, value);
   }
+
+  useEffect(() => {
+    apiCountry.then(response=>{
+      setCountries(response.data)
+    })
+  },[])
 
   const onClickSubmit = (event) => {
     event.preventDefault()
@@ -69,13 +76,12 @@ export default function ApplyTripPage() {
         onChange={handleInputs}
         pattern="[A-Za-z ]{10,}"
         required />
-      <input
-        name="country"
-        type=""
-        value={form.country}
-        placeholder="País"
-        onChange={handleInputs} 
-        required />
+      <select name="country" value={form.country} onChange={handleInputs}>
+          {countries.map(res=>{
+            return(
+              <option key={res.alpha3Code} value={res.name}>{res.name}</option>)
+          })}
+      </select>
       <button type="submit">Confirmar</button>
       <button onClick={() => history.replace('/')}>Cancelar</button>
     </form>

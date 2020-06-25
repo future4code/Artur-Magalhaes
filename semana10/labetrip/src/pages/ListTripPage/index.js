@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import api from '../../service/api';
+import { api } from '../../service/api';
 
 export default function ListTripPage() {
   const [trips, setTrips] = useState([]);

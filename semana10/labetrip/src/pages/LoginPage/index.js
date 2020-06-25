@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import useForm from '../../hooks/useForm';
-import api from '../../service/api';
+import { api } from '../../service/api';
 
 export default function LoginPage() {
   const { form, handleForm } = useForm({
