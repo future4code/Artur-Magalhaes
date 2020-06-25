@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import { api } from '../../service/api';
+import useToken from '../../hooks/useToken';
 
 export default function DetailTripPage() {
   const [trip, setTrip] = useState({});
   const [candidates, setCandidates] = useState([]);
-  const [token, setToken] = useState(localStorage.getItem('token'));
+
+  const {token, validToken} = useToken('');
 
   const history = useHistory();
 
   const params = useParams();
 
   useEffect(() => {
-    if (token === null){
-      history.push('/login');
-    }
+    
+    validToken()
     const config = {
       headers: {
       auth: token,
@@ -30,7 +31,7 @@ export default function DetailTripPage() {
       .catch(error => {
         console.log(error)
       });
-  },[])
+  },[token])
 
   const approve = (id) => {
     const data = {

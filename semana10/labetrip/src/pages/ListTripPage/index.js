@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { api } from '../../service/api';
+import useToken from '../../hooks/useToken';
 
 export default function ListTripPage() {
   const [trips, setTrips] = useState([]);
   const history = useHistory();
+  const { token, validToken } = useToken('');
 
   useEffect(() => {
-    const token = localStorage.getItem('token')
-
-    if(token === null) {
-      history.push('/login')
-    } else {
+    validToken();
     api.get('trips')
       .then(response => {
         setTrips(response.data.trips);
@@ -19,7 +17,7 @@ export default function ListTripPage() {
       .catch(error => {
         console.log(error);
       })
-  }},[trips]);
+  },[trips]);
 
   const createTrip = () => {
     history.push('/createtrip')

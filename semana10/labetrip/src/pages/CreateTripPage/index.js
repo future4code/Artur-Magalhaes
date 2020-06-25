@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import useForm from '../../hooks/useForm';
 import { api } from '../../service/api';
+import useToken from '../../hooks/useToken';
 
 export default function CreateTripPage() {
+  const { token, validToken } = useToken();
   const { form, handleForm } = useForm({
     name: '',
     planet: '',
@@ -14,7 +16,6 @@ export default function CreateTripPage() {
 
   const history = useHistory();
 
-  const [token, setToken] = useState(localStorage.getItem('token'))
   // Planets list
   const [planets, setPlanets] = useState([
     {name: "Mercúrio"}, {name: "Vênus"}, {name: "Terra"}, {name: "Marte"}, {name: "Júpiter"}, {name: "Saturno"}, {name: "Urano"}, {name: "Netuno"}
@@ -35,13 +36,11 @@ export default function CreateTripPage() {
   }
 
   useEffect(() => {
+    
     getDate();
+    validToken()
 
-    if(token === null){
-      history.push('/login');
-    }
-
-  },[token]);
+  },[]);
 
   const createTrip = (event) => {
     event.preventDefault();
