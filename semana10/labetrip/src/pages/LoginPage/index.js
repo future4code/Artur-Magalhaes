@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import useForm from '../../hooks/useForm';
-import { api } from '../../service/api';
+import { postLogin } from '../../service/api';
 
 export default function LoginPage() {
   const { form, handleForm } = useForm({
@@ -20,10 +20,15 @@ export default function LoginPage() {
     event.preventDefault();
     const loginData = form;
 
-    const response = await api.post('login', loginData)
-    localStorage.setItem('token', response.data.token);
-    history.replace('/listtrip');
-    
+    postLogin(loginData)
+      .then(response=>{
+        console.log(response);
+        localStorage.setItem('token', response.token);
+        history.replace('/listtrip');
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
 
   return(

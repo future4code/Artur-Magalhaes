@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
-import { api } from '../../service/api';
+import { api, getTripDetail, putDecideCandidate } from '../../service/api';
 import useToken from '../../hooks/useToken';
 
 export default function DetailTripPage() {
-  const [trip, setTrip] = useState({});
+  const [trip, setTrip] = useState([]);
   const [candidates, setCandidates] = useState([]);
 
   const {token, validToken} = useToken('');
@@ -16,26 +16,27 @@ export default function DetailTripPage() {
   useEffect(() => {
     
     validToken()
+
     const config = {
       headers: {
-      auth: token,
+        auth: token,
       }
     }
-
+    
     api.get(`trip/${params.id}`, config)
       .then(response => {
-        console.log(response.data.trip)
         setTrip(response.data.trip);
         setCandidates(response.data.trip.candidates)
-      },)
+      })
       .catch(error => {
         console.log(error)
       });
-  },[token])
+      
+  },[token, candidates])
 
-  const approve = (id) => {
+  const approve = (id, status) => {
     const data = {
-      "approve": true
+      "approve": status
     }
 
     const config = {
@@ -48,25 +49,10 @@ export default function DetailTripPage() {
       .catch(error => {
         console.log(error)
       });
-    window.alert(`Candidato Aprovado`);
-  }
-
-  const disapprove = (id) => {
-    const data = {
-      "approve": false
-    }
-
-    const config = {
-      headers: {
-      auth: token,
-      }
-    }
-
-    api.put(`trips/${params.id}/candidates/${id}/decide`, data, config)
-      .catch(error => {
-        console.log(error)
-      });
-    window.alert(`Candidato Desaprovado`);
+    
+    (status?
+      window.alert(`Candidato Aprovado`) : 
+      window.alert(`Candidato Desaprovado`));
   }
 
   return(<>
@@ -76,8 +62,8 @@ export default function DetailTripPage() {
     {candidates.map(candidate => {
       return(<div key={candidate.id}>
         {candidate.name}
-        <button onClick={() => approve(candidate.id)}>OK</button>
-        <button onClick={() => disapprove(candidate.id)}>X</button>
+        <button onClick={() => approve(candidate.id, true)}>OK</button>
+        <button onClick={() => approve(candidate.id, false)}>X</button>
       </div>)
     })}
     </>)

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { api } from '../../service/api';
+import { api, getTrips, delDeleteTrip } from '../../service/api';
 import useToken from '../../hooks/useToken';
 
 export default function ListTripPage() {
@@ -9,14 +9,13 @@ export default function ListTripPage() {
   const { token, validToken } = useToken('');
 
   useEffect(() => {
+    
     validToken();
-    api.get('trips')
-      .then(response => {
-        setTrips(response.data.trips);
-      })
-      .catch(error => {
-        console.log(error);
-      })
+
+    getTrips().then(response => {
+      setTrips(response)
+    })
+
   },[trips]);
 
   const createTrip = () => {
@@ -25,14 +24,7 @@ export default function ListTripPage() {
 
   const deleteTrip = (id) => {
     window.alert('Viagem Retirada')
-    api.delete(`trips/${id}`)
-      .catch(error => {
-        console.log(error);
-      });
-  }
-
-  const editTrip = (id) => {
-    history.push(`/detailtrip/${id}`);
+    delDeleteTrip(id)
   }
 
   const detailTrip = (id) => {
@@ -43,10 +35,10 @@ export default function ListTripPage() {
     <button onClick={createTrip}>Criar Viagem</button>
     {trips.map(trip => {
       return(
-        <div key={trip.id} onClick={() => detailTrip(trip.id)}>
+        <div key={trip.id}>
           {trip.name} 
           <button onClick={() => deleteTrip(trip.id)}>X</button>
-          <button onClick={() => editTrip(trip.id)}>Edit</button>
+          <button onClick={() => detailTrip(trip.id)}>Edit</button>
         </div>)
     })}
   </>)

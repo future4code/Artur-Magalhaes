@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import useForm from '../../hooks/useForm';
-import { api } from '../../service/api';
+import { api, postCreateTrip } from '../../service/api';
 import useToken from '../../hooks/useToken';
 
 export default function CreateTripPage() {
@@ -44,7 +44,6 @@ export default function CreateTripPage() {
 
   const createTrip = (event) => {
     event.preventDefault();
-    console.log(form)
     const data = form
 
     const config = {
@@ -52,14 +51,20 @@ export default function CreateTripPage() {
         auth: token,
       }}
 
-    api.post('trips', data, config)
+    postCreateTrip(data, config)
+      .then(response => {
+      window.alert('Viagem Criada!');
+      history.goBack();
+    })
+
+    /*api.post('trips', data, config)
       .then(response => {
         window.alert('Viagem Criada!');
         history.goBack();
       })
       .catch(error => {
         console.log(error);
-      })
+      })*/
   }
 
   const cancel = () => {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import useForm from '../../hooks/useForm';
-import { api, apiCountry } from '../../service/api';
+import { api, apiCountry, postApplyToTrip } from '../../service/api';
 
 export default function ApplyTripPage() {
   const [countries, setCountries] = useState([])
@@ -29,15 +29,16 @@ export default function ApplyTripPage() {
 
   const onClickSubmit = (event) => {
     event.preventDefault()
-    console.log(form)
 
     const data = form
 
-    api.post(`trips/${params.id}/apply`, data)
+    postApplyToTrip(params.id, data)
+
+    /*api.post(`trips/${params.id}/apply`, data)
       .then(response => {
       }).catch(error => {
         console.log(error);
-      });
+      });*/
       
     history.replace('/');
   }
