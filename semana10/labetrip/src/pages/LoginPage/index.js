@@ -2,6 +2,8 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import useForm from '../../hooks/useForm';
 import { postLogin } from '../../service/api';
+import * as S from './style';
+import HeaderLogIn from '../../components/HeaderLogIn';
 
 export default function LoginPage() {
   const { form, handleForm } = useForm({
@@ -31,16 +33,20 @@ export default function LoginPage() {
       })
   }
 
-  return(
-    <form onSubmit={login}>
-      <input 
+  return(<>
+    <HeaderLogIn />
+    <S.FormApply onSubmit={login}>
+      <S.DivLogin>LOG IN</S.DivLogin>
+      <S.Labels htmlFor="email">E-mail</S.Labels>
+      <S.Input 
         name="email"
         value={form.email}
         placeholder='Email'
         type='email'
         onChange={handleInputs}
         required />
-      <input 
+      <S.Labels htmlFor="password">Senha</S.Labels>
+      <S.Input 
         name="password"
         value={form.password}
         placeholder='Senha'
@@ -48,5 +54,6 @@ export default function LoginPage() {
         onChange={handleInputs}
         required />
       <button>Entrar</button>
-    </form>)
+    </S.FormApply>
+  </>)
 }

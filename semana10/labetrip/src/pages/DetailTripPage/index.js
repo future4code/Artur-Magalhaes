@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import { api, getTripDetail, putDecideCandidate } from '../../service/api';
 import useToken from '../../hooks/useToken';
+import * as SG from '../../components/globalStyle'
+import * as S from './style';
+import HeaderConnected from '../../components/HeaderConnected';
 
 export default function DetailTripPage() {
   const [trip, setTrip] = useState([]);
@@ -56,15 +59,25 @@ export default function DetailTripPage() {
   }
 
   return(<>
+    <HeaderConnected />
     <button onClick={() => history.push('/listTrip')}>Voltar</button>
-    <div key={trip.id}>{trip.name}</div>
-    <div>{trip.planet} {trip.description} {trip.durationInDays} {trip.date}</div>
-    {candidates.map(candidate => {
-      return(<div key={candidate.id}>
-        {candidate.name}
-        <button onClick={() => approve(candidate.id, true)}>OK</button>
-        <button onClick={() => approve(candidate.id, false)}>X</button>
-      </div>)
-    })}
+    <S.StrongTitle key={trip.id}>{trip.name}</S.StrongTitle>
+    <S.DivDetail>
+      {trip.planet} - {trip.description} - {trip.date} - {trip.durationInDays} dias
+    </S.DivDetail>
+    <SG.Ul>
+      {candidates.map(candidate => {
+        return(
+          <SG.ListTrips key={candidate.id}>
+            <S.DivList>
+            <strong>{candidate.name}</strong>
+            <div>
+              <button onClick={() => approve(candidate.id, true)}>OK</button>
+              <button onClick={() => approve(candidate.id, false)}>X</button>
+            </div>
+            </S.DivList>
+          </SG.ListTrips>)
+      })}
+    </SG.Ul>
     </>)
 }

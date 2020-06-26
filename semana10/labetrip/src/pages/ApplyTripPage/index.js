@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import useForm from '../../hooks/useForm';
 import { api, apiCountry, postApplyToTrip } from '../../service/api';
+import * as SF from './style';
+import Header from '../../components/Header'
 
 export default function ApplyTripPage() {
   const [countries, setCountries] = useState([])
@@ -43,9 +45,11 @@ export default function ApplyTripPage() {
     history.replace('/');
   }
 
-  return(
-    <form onSubmit={onClickSubmit}>
-      <input 
+  return(<>
+    <Header />
+    <SF.FormApply onSubmit={onClickSubmit}>
+      <SF.Labels htmlFor="name">Nome</SF.Labels>
+      <SF.Input 
         name="name" 
         type="text"
         value={form.name}
@@ -53,7 +57,11 @@ export default function ApplyTripPage() {
         onChange={handleInputs} 
         pattern="[A-Z][a-z ]{2,}"
         required />
-      <input 
+      <div>
+        <SF.Labels htmlFor="age">Idade</SF.Labels>
+        <SF.Labels htmlFor="profession">Profissão</SF.Labels>
+      </div>
+      <SF.Input15pc 
         name="age"
         type="number"
         value={form.age}
@@ -61,15 +69,7 @@ export default function ApplyTripPage() {
         onChange={handleInputs}
         min="18"
         required />
-      <input 
-        name="applicationText" 
-        type="text"
-        value={form.applicationText} 
-        placeholder="Interesse"
-        onChange={handleInputs}
-        pattern="[A-Za-z ]{30,}"
-        required />
-      <input 
+      <SF.Input85pc  
         name="profession"
         type="text"
         value={form.profession}
@@ -77,14 +77,25 @@ export default function ApplyTripPage() {
         onChange={handleInputs}
         pattern="[A-Za-z ]{10,}"
         required />
-      <select name="country" value={form.country} onChange={handleInputs}>
+      <SF.Labels htmlFor="applicationText">Descreva seu interesse na viagem</SF.Labels>
+      <SF.Input 
+        name="applicationText" 
+        type="text"
+        value={form.applicationText} 
+        placeholder="Interesse"
+        onChange={handleInputs}
+        pattern="[A-Za-z ]{30,}"
+        required />
+      <SF.Labels htmlFor="country">País</SF.Labels>  
+      <SF.SelectCountry name="country" value={form.country} onChange={handleInputs}>
           {countries.map(res=>{
             return(
               <option key={res.alpha3Code} value={res.name}>{res.name}</option>)
           })}
-      </select>
+      </SF.SelectCountry>
+    
       <button type="submit">Confirmar</button>
       <button onClick={() => history.replace('/')}>Cancelar</button>
-    </form>
-    )
+    </SF.FormApply>
+    </>)
 }

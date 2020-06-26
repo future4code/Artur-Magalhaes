@@ -3,6 +3,8 @@ import { useHistory } from 'react-router-dom';
 import useForm from '../../hooks/useForm';
 import { api, postCreateTrip } from '../../service/api';
 import useToken from '../../hooks/useToken';
+import * as S from './style';
+import HeaderConnected from '../../components/HeaderConnected';
 
 export default function CreateTripPage() {
   const { token, validToken } = useToken();
@@ -72,23 +74,18 @@ export default function CreateTripPage() {
   }
 
   return(<>
+    <HeaderConnected />
     <div>CreateTrip</div>
-    <form onSubmit={createTrip}>
-      <select name="planet" value={form.planet} onChange={handleInputs} required>
+    <S.FormApply onSubmit={createTrip}>
+      <S.Labels htmlFor="planet">Planeta</S.Labels>
+      <S.SelectCountry name="planet" value={form.planet} onChange={handleInputs} required>
         <option value=""></option>
         {planets.map(planet => {
           return <option key={planet.name} value={planet.name}>{planet.name}</option>
         })}
-      </select>
-      <input
-        name="date"
-        type="date" //Data no futuro
-        min={DateToday}
-        placeholder="Data"
-        value={form.date}
-        onChange={handleInputs} 
-        required />
-      <input
+      </S.SelectCountry>
+      <S.Labels htmlFor="name">Nome da Viagem</S.Labels>
+      <S.Input
         name="name"
         type="text"
         placeholder="Nome"
@@ -96,7 +93,8 @@ export default function CreateTripPage() {
         onChange={handleInputs} 
         pattern="[A-Z][a-z \d]{4,}"
         required />
-      <input
+      <S.Labels htmlFor="description">Descrição da Viagem</S.Labels>
+      <S.Input
         name="description"
         type="text"
         placeholder="Descrição"
@@ -104,16 +102,33 @@ export default function CreateTripPage() {
         onChange={handleInputs} 
         pattern="[A-Z \d][A-Za-z \d]*{29,}"
         required />
-      <input
+      <div>
+        <S.Labels htmlFor="date">Data</S.Labels>
+        <S.Labels htmlFor="durationInDays">
+          Tempo de Viagem
+          <S.Small> (em dias)</S.Small>
+        </S.Labels>
+      </div>
+      <S.Input15pc
+        name="date"
+        type="date"
+        min={DateToday}
+        placeholder="Data"
+        value={form.date}
+        onChange={handleInputs} 
+        required />
+      <S.Input85pc
         name="durationInDays"
         type="number"
         min="50"
-        placeholder="Duração (Em dias)"
+        placeholder="Duração"
         value={form.durationInDays}
         onChange={handleInputs}
         required />
-      <button onClick={cancel}>Cancelar</button>
-      <button type="submit">Criar</button>
-    </form>
+      <div>
+        <button onClick={cancel}>Cancelar</button>
+        <button type="submit">Criar</button>
+      </div>
+    </S.FormApply>
   </>)
 }
