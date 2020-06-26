@@ -22,8 +22,9 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     width: '140px',
-    marginTop: '32px',
-    marginRight: '32px',
+    marginTop: '36px',
+    marginRight: '36px',
+    marginBottom: '2px',
   }
 }));
 

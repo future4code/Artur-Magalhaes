@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const DivCreate = styled.div`
-    margin-top: 18px;
+    margin-top: 20px;
     text-align: center;
     font-size: 28px;
     font-weight: bold;

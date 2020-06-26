@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const FormApply = styled.form`
     width: 500px;
-    margin: 20px auto;
+    margin: 36px auto;
     border: 1px solid;
     height: 375px;
     padding-top: 16px;

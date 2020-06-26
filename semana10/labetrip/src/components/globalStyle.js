@@ -7,7 +7,7 @@ export const DivContent = styled.div`
 export const Ul = styled.ul`
     list-style: none;
     margin: 0px;
-    padding: 16px;
+    padding: 18px;
 `
 export const ListTrips = styled.li`
     background-color: #BDC2B8;
@@ -15,6 +15,5 @@ export const ListTrips = styled.li`
     border: 1px solid;
     margin: 16px 20px;
     text-align: center;
-    cursor: auto;
     font-size: 20px;
 `

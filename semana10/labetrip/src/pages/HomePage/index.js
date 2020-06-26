@@ -3,11 +3,18 @@ import { useHistory } from 'react-router-dom'
 import { api, getTrips } from '../../service/api';
 import Header from '../../components/Header';
 import * as S from '../../components/globalStyle';
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles((theme) => ({
+  button: {
+    cursor: 'pointer',
+  },
+}));
 
 export default function Home() {
   const [trips, setTrips] = useState([]);
   const history = useHistory();
-
+  const classes = useStyles();
   useEffect(() => {
 
     getTrips()
@@ -26,7 +33,7 @@ export default function Home() {
       <S.Ul>
       {trips.map((trip) => {
         return(
-          <S.ListTrips key={trip.id} onClick={() => history.push(`/apply/${trip.id}`)}>
+          <S.ListTrips className={classes.button} key={trip.id} onClick={() => history.push(`/apply/${trip.id}`)}>
             <strong>{trip.name}</strong> - {trip.planet} - {trip.date} - {trip.durationInDays} dias
           </S.ListTrips>)
       })}
