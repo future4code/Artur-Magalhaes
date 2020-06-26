@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: '8px',
   },
   button: {
+    width: '140px',
     marginTop: '32px',
     marginRight: '32px',
   }

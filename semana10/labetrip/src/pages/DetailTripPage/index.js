@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     cursor: 'pointer'
   },
   button: {
+    width: '88px',
     marginTop: '16px',
     marginLeft: '32px',
   }
@@ -81,7 +82,7 @@ export default function DetailTripPage() {
 
   return(<>
     <HeaderConnected />
-    <Button variant="contained" className={classes.button} onClick={() => history.push('/listTrip')}>Voltar</Button>
+    <Button variant="contained" color="primary" className={classes.button} onClick={() => history.push('/listTrip')}>Voltar</Button>
     <S.StrongTitle key={trip.id}>{trip.name}</S.StrongTitle>
     <S.DivDetail>
       {trip.planet} - {trip.description} - {trip.date} - {trip.durationInDays} dias

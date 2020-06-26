@@ -51,6 +51,6 @@ export const SelectCountry = styled.select`
 
 export const Button = styled.div`
     display: flex;
-    flex-direction: row-reverse;
+    justify-content: center;
     margin-top: 40px;
 `

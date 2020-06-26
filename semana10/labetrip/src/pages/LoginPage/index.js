@@ -9,7 +9,7 @@ import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
   button: {
-    width: '115px',
+    width: '92px',
     marginRight: '24px',
   }
 }));
@@ -63,7 +63,7 @@ export default function LoginPage() {
         onChange={handleInputs}
         required />
       <S.DivButtonLogIn> 
-        <Button variant="contained" color="primary" type="onSubmit" form="form">Entrar</Button>
+        <Button className={classes.button} variant="contained" color="primary" type="onSubmit" form="form">Entrar</Button>
       </S.DivButtonLogIn>
     </S.FormApply>
   </>)
