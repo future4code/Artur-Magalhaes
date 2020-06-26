@@ -5,11 +5,32 @@ import useToken from '../../hooks/useToken';
 import * as S from '../../components/globalStyle'
 import * as SL from './style';
 import HeaderConnected from '../../components/HeaderConnected';
+import { makeStyles } from '@material-ui/core/styles'
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import Button from '@material-ui/core/Button';
+
+const useStyles = makeStyles((theme) => ({
+  edit: {
+    color: 'blue',
+    cursor: 'pointer',
+  },
+  delete: {
+    color: 'red',
+    cursor: 'pointer',
+    marginRight: '8px',
+  },
+  button: {
+    marginTop: '32px',
+    marginRight: '32px',
+  }
+}));
 
 export default function ListTripPage() {
   const [trips, setTrips] = useState([]);
   const history = useHistory();
   const { token, validToken } = useToken('');
+  const classes = useStyles();
 
   useEffect(() => {
     
@@ -37,7 +58,9 @@ export default function ListTripPage() {
   return(
     <S.DivContent>
       <HeaderConnected />
-      <button onClick={createTrip}>Criar Viagem</button>
+      <SL.DivCreateTrip>
+        <Button className={classes.button} variant="contained" color="primary" onClick={createTrip}>Criar Viagem</Button>
+      </SL.DivCreateTrip>
       <S.Ul>
       {trips.map(trip => {
         return(
@@ -45,8 +68,8 @@ export default function ListTripPage() {
               <SL.DivList>
                 <strong>{trip.name}</strong>
                 <div>
-                  <button onClick={() => deleteTrip(trip.id)}>X</button>
-                  <button onClick={() => detailTrip(trip.id)}>Edit</button>
+                  <DeleteForeverIcon className={classes.delete} viewBox="0 0 24 20" onClick={() => deleteTrip(trip.id)} />
+                  <EditIcon className={classes.edit} viewBox="0 0 24 20" onClick={() => detailTrip(trip.id)} />
                 </div>
               </SL.DivList>
             </S.ListTrips>)

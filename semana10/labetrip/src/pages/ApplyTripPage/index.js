@@ -4,11 +4,21 @@ import useForm from '../../hooks/useForm';
 import { api, apiCountry, postApplyToTrip } from '../../service/api';
 import * as SF from './style';
 import Header from '../../components/Header'
+import { makeStyles } from '@material-ui/core/styles'
+import Button from '@material-ui/core/Button';
+
+const useStyles = makeStyles((theme) => ({
+  button: {
+    width: '115px',
+    marginRight: '24px',
+  }
+}));
 
 export default function ApplyTripPage() {
   const [countries, setCountries] = useState([])
   const params = useParams();
   const history = useHistory();
+  const classes = useStyles();
 
   const { form, handleForm } = useForm({
     name: '',
@@ -93,9 +103,10 @@ export default function ApplyTripPage() {
               <option key={res.alpha3Code} value={res.name}>{res.name}</option>)
           })}
       </SF.SelectCountry>
-    
-      <button type="submit">Confirmar</button>
-      <button onClick={() => history.replace('/')}>Cancelar</button>
+      <SF.DivButtons>
+        <Button className={classes.button} variant="contained" color="primary" type="submit">Confirmar</Button>
+        <Button className={classes.button} variant="contained" color="secondary" onClick={() => history.replace('/')}>Cancelar</Button>
+      </SF.DivButtons>
     </SF.FormApply>
     </>)
 }

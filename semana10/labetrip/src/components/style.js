@@ -4,7 +4,7 @@ export const DivContainer = styled.div`
     display: flex;
     background-color: #7C75DE;
     color: white;
-    padding: 8px 36px;
+    padding: 16px 36px;
     justify-content: space-between;
 `
 
@@ -16,6 +16,6 @@ export const DivLogIn = styled.div`
     display: flex;
     background-color: #7C75DE;
     color: white;
-    padding: 8px 24px;
+    padding: 16px 24px;
     justify-content: center;
 `

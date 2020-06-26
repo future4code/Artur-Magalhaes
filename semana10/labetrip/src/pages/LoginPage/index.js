@@ -4,13 +4,22 @@ import useForm from '../../hooks/useForm';
 import { postLogin } from '../../service/api';
 import * as S from './style';
 import HeaderLogIn from '../../components/HeaderLogIn';
+import { makeStyles } from '@material-ui/core/styles'
+import Button from '@material-ui/core/Button';
+
+const useStyles = makeStyles((theme) => ({
+  button: {
+    width: '115px',
+    marginRight: '24px',
+  }
+}));
 
 export default function LoginPage() {
   const { form, handleForm } = useForm({
     email: '',
     password: '',
   });
-
+  const classes = useStyles();
   const history = useHistory();
   
   const handleInputs = event => {
@@ -35,8 +44,8 @@ export default function LoginPage() {
 
   return(<>
     <HeaderLogIn />
-    <S.FormApply onSubmit={login}>
-      <S.DivLogin>LOG IN</S.DivLogin>
+    <S.FormApply onSubmit={login} id="form">
+      <S.DivLogin>LOGIN</S.DivLogin>
       <S.Labels htmlFor="email">E-mail</S.Labels>
       <S.Input 
         name="email"
@@ -53,7 +62,9 @@ export default function LoginPage() {
         type="password"
         onChange={handleInputs}
         required />
-      <button>Entrar</button>
+      <S.DivButtonLogIn> 
+        <Button variant="contained" color="primary" type="onSubmit" form="form">Entrar</Button>
+      </S.DivButtonLogIn>
     </S.FormApply>
   </>)
 }

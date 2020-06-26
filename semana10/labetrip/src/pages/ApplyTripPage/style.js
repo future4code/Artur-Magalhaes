@@ -36,3 +36,9 @@ export const SelectCountry = styled.select`
     display: block;
     height: 20px;
 `
+
+export const DivButtons = styled.div`
+    display: flex;
+    justify-content: center;
+    margin-top: 48px;
+`

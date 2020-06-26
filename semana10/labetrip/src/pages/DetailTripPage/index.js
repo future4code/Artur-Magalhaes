@@ -5,10 +5,31 @@ import useToken from '../../hooks/useToken';
 import * as SG from '../../components/globalStyle'
 import * as S from './style';
 import HeaderConnected from '../../components/HeaderConnected';
+import { makeStyles } from '@material-ui/core/styles'
+import CheckIcon from '@material-ui/icons/Check';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import Button from '@material-ui/core/Button';
+
+const useStyles = makeStyles((theme) => ({
+  approve: {
+    color: 'green',
+    cursor: 'pointer',
+    marginRight: '8px'
+  },
+  disapprove: {
+    color: 'red',
+    cursor: 'pointer'
+  },
+  button: {
+    marginTop: '16px',
+    marginLeft: '32px',
+  }
+}));
 
 export default function DetailTripPage() {
   const [trip, setTrip] = useState([]);
   const [candidates, setCandidates] = useState([]);
+  const classes = useStyles();
 
   const {token, validToken} = useToken('');
 
@@ -60,7 +81,7 @@ export default function DetailTripPage() {
 
   return(<>
     <HeaderConnected />
-    <button onClick={() => history.push('/listTrip')}>Voltar</button>
+    <Button variant="contained" className={classes.button} onClick={() => history.push('/listTrip')}>Voltar</Button>
     <S.StrongTitle key={trip.id}>{trip.name}</S.StrongTitle>
     <S.DivDetail>
       {trip.planet} - {trip.description} - {trip.date} - {trip.durationInDays} dias
@@ -72,8 +93,8 @@ export default function DetailTripPage() {
             <S.DivList>
             <strong>{candidate.name}</strong>
             <div>
-              <button onClick={() => approve(candidate.id, true)}>OK</button>
-              <button onClick={() => approve(candidate.id, false)}>X</button>
+              <CheckIcon className={classes.approve} viewBox="0 0 20 20" onClick={() => approve(candidate.id, true)} />
+              <DeleteForeverIcon className={classes.disapprove} viewBox="0 0 20 20" onClick={() => approve(candidate.id, false)}>X</DeleteForeverIcon>
             </div>
             </S.DivList>
           </SG.ListTrips>)

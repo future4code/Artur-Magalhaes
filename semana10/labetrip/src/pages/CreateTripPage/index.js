@@ -5,6 +5,15 @@ import { api, postCreateTrip } from '../../service/api';
 import useToken from '../../hooks/useToken';
 import * as S from './style';
 import HeaderConnected from '../../components/HeaderConnected';
+import { makeStyles } from '@material-ui/core/styles'
+import Button from '@material-ui/core/Button';
+
+const useStyles = makeStyles((theme) => ({
+  button: {
+    width: '115px',
+    marginRight: '24px',
+  }
+}));
 
 export default function CreateTripPage() {
   const { token, validToken } = useToken();
@@ -15,7 +24,7 @@ export default function CreateTripPage() {
     description: '',
     durationInDays: '',
   })
-
+  const classes = useStyles();
   const history = useHistory();
 
   // Planets list
@@ -75,7 +84,7 @@ export default function CreateTripPage() {
 
   return(<>
     <HeaderConnected />
-    <div>CreateTrip</div>
+    <S.DivCreate>CreateTrip</S.DivCreate>
     <S.FormApply onSubmit={createTrip}>
       <S.Labels htmlFor="planet">Planeta</S.Labels>
       <S.SelectCountry name="planet" value={form.planet} onChange={handleInputs} required>
@@ -125,10 +134,10 @@ export default function CreateTripPage() {
         value={form.durationInDays}
         onChange={handleInputs}
         required />
-      <div>
-        <button onClick={cancel}>Cancelar</button>
-        <button type="submit">Criar</button>
-      </div>
+      <S.Button>
+        <Button className={classes.button} variant="contained" color="secondary" onClick={cancel}>Cancelar</Button>
+        <Button className={classes.button} variant="contained" color="primary" type="submit">Criar</Button>
+      </S.Button>
     </S.FormApply>
   </>)
 }
