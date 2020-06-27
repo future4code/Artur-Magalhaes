@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
 export default function DetailTripPage() {
   const [trip, setTrip] = useState([]);
   const [candidates, setCandidates] = useState([]);
+  const [approves, setApproves] = useState([]);
   const classes = useStyles();
 
   const {token, validToken} = useToken('');
@@ -57,7 +58,8 @@ export default function DetailTripPage() {
         console.log(error)
       });
       
-  },[token, candidates])
+    setApproves(trip.approved)
+  },[token, candidates, approves])
 
   const approve = (id, status) => {
     const data = {
@@ -100,6 +102,19 @@ export default function DetailTripPage() {
             </S.DivList>
           </SG.ListTrips>)
       })}
+    </SG.Ul>
+    <SG.Ul>
+      <S.StrongTitle>Candidatos Aprovados</S.StrongTitle>
+      {approves !== undefined && approves.length > 0 
+        && approves.map(candidate => {
+          return(<>
+            <SG.ListTripsAppoved key={candidate.id}>
+              <S.DivList>
+              <strong>{candidate.name}</strong>
+              </S.DivList>
+            </SG.ListTripsAppoved>
+          </>)})
+      }
     </SG.Ul>
     </>)
 }
