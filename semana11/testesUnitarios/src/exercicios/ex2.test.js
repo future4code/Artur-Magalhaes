@@ -9,9 +9,9 @@ describe("Checa Palíndromo", () => {
     const ehPalindromo = checaPalindromo("ovo");
     expect(ehPalindromo).toEqual(true);
   });
-  test("retorna true para ele", () => {
-    const ehPalindromo = checaPalindromo("ele");
-    expect(ehPalindromo).toEqual(true);
+  test("retorna false para vamos", () => {
+    const ehPalindromo = checaPalindromo("vamos");
+    expect(ehPalindromo).toEqual(false);
   });
   test("retorna true para osso", () => {
     const ehPalindromo = checaPalindromo("osso");
