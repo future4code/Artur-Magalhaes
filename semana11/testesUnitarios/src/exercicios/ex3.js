@@ -1,6 +1,6 @@
 export function checaItensDuplicados(array) {
   
-  if (array.length < 1){
+  /*if (array.length < 1){
     return false
   }
   for(let i = 0; i < array.length; i++){
@@ -10,5 +10,14 @@ export function checaItensDuplicados(array) {
       }
     }
     return false;
-  }
+  }*/
+  console.log(array);
+  let vetor = false
+  array.forEach((element,index) => {
+    if(array.indexOf(index) === -1){
+      console.log(array.indexOf(index))
+      vetor = true;
+    }
+  });
+  return vetor
 }
