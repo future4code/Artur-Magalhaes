@@ -1,7 +1,5 @@
 export function checaBissexto(ano) {
-  if ((ano % 4 === 0 && ano % 100 !== 0) || ano % 400 === 0) {
-    return true;
-  } else {
-    return false;
-  }
+  const retorno = ano % 400 === 0 ? true : (ano % 4 === 0 && ano % 100 ) ? true : false;
+  
+  return retorno
 }
