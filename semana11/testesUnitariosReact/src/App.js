@@ -71,6 +71,7 @@ const App = () => {
         <button
           data-testid="btnInput"
           onClick={addPost}>Adicionar</button>
+        {inputVazio && <h5>O Post não pode ser vazio!</h5>}
       </div>
       {postsList.length === 0 && 
         <h3 data-testid="zeroPost">Nenhum Post</h3>}
