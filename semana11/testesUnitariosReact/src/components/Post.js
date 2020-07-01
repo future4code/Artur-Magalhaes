@@ -12,6 +12,7 @@ export const Post = props => {
         {props.post.liked ? "Descurtir" : "Curtir"}
       </button>
       <button
+        title={props.post.text}
         data-testid="deletePost"
         onClick={() => props.deletePost(props.post.id)}>Apagar</button>
     </div>

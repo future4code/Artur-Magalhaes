@@ -1,9 +1,17 @@
 import React from "react";
-import { render, fireEvent, waitForElement, getByText, getByTestId } from "@testing-library/react";
+import { render, fireEvent, waitForElement, getByText, getByTestId, getByAltText } from "@testing-library/react";
 import '@testing-library/jest-dom/extend-expect';
 import App from "./App";
 
 describe('Testes', () => {
+
+test('Input vazio', () => {
+    const { getByTestId, getByText } = render(<App />);
+    const btnAdd = getByTestId('btnInput')
+    fireEvent.click(btnAdd)
+    const postVazio = getByText(/Nenhum Post/)
+    expect(postVazio).toHaveTextContent(/Nenhum Post/);
+});
 //Adicionar post
 test('Adicionar/Curtir/Descurtir/Deletar Post', async () => {
     const { getByPlaceholderText, getByTestId, getByText } = render(<App />);
@@ -43,8 +51,8 @@ test('Adicionar/Curtir/Descurtir/Deletar Post', async () => {
     const zeroPost = getByTestId(/zeroPost/);
     expect(zeroPost).toHaveTextContent(/Nenhum Post/)
 })
-test('Adicionar/Adicionar/Quantidade', async () => {
-    const { getByPlaceholderText, getByTestId, getAllByText } = render(<App />);
+test('Adicionar/Adicionar/Quantidade/Deletar 2o Post', async () => {
+    const { getByPlaceholderText, getByTestId, getByTitle } = render(<App />);
 
     const newPost = 'testing';
 
@@ -68,10 +76,18 @@ test('Adicionar/Adicionar/Quantidade', async () => {
     
 
     //Quantidade de Posts
-    const quantidadePosts = getByTestId(/quantidade-posts/);
+    let quantidadePosts = getByTestId(/quantidade-posts/);
     expect(quantidadePosts).toHaveTextContent(/Quantidade de Posts: 2/)
     //input vazio
     expect(inputPost.value).toBe('');
+
+    //Deletar testing2
+    const deletePost = getByTitle(/testing2/);
+    console.log(deletePost)
+    fireEvent.click(deletePost);
+    quantidadePosts = getByTestId(/quantidade-posts/);
+    expect(quantidadePosts).toHaveTextContent(/Quantidade de Posts: 1/)
+    
 })
 
 });
