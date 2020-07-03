@@ -2,6 +2,27 @@
   text-align: center;
 }
 
+.App-form {
+  height: 13px;
+}
+
+.App-btn {
+  font-size: 12px;
+  height: 19px;
+}
+
+.App-tasks{
+  display: flex;
+  padding: 20px 0;
+}
+
+.App-task{
+  width: 50%;
+  min-height: 80vh;
+  border: 1px solid;
+  padding: 0 10px;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

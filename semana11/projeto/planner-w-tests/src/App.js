@@ -59,7 +59,6 @@ function App() {
 
   const updateTask = (event) => {
     event.preventDefault()
-    console.log("ID update: ", id)
     api.put(`${id}`, form)
     setInputUpdate(false)
   }
@@ -69,12 +68,14 @@ function App() {
       <div key={task.id}
         data-testid="task">
         {task.text}
-        <button 
-          title={`delete${task.id}`}
-          onClick={() => deleteTask(task.id)}>Deletar</button>
-        <button 
-          title={`edit${task.id}`}
-          onClick={() => componentUpdateTask(task.id)}>Editar</button>
+        <div>
+          <button 
+            title={`delete${task.id}`}
+            onClick={() => deleteTask(task.id)}>Deletar</button>
+          <button 
+            title={`edit${task.id}`}
+            onClick={() => componentUpdateTask(task.id)}>Editar</button>
+        </div>
       </div>)
   }
 
@@ -84,6 +85,7 @@ function App() {
         data-testid="form"
         onSubmit={createTask}>
         <input 
+          className="App-form"
           name="text"
           placeholder="Tarefa"
           onChange={onChangeInput}
@@ -103,55 +105,56 @@ function App() {
               title={day}>{day}</option>
           })}
         </select>
-        <button>Submit</button>
+        <button className="App-btn">Submit</button>
       </form>
       {checkCreateTask === false &&
         <h4 data-testid="invalid">Texto Inválido</h4>}
       {checkCreateTask === true &&
         <h4 data-testid="valid">Tarefa Criada</h4>}
-      <div>
-        <h4>Segunda</h4>
-        {tasks.map(task => {
-          if (task.day === 'Segunda'){
-            return (filterDay(task));
-          }})
-      }</div>
-      <div>
-        <h4>Terça</h4>
-        {tasks.map(task => {
-          if (task.day === 'Terça'){
-            return (filterDay(task));
-          }})
-      }</div>
-      <div>
-        <h4>Quarta</h4>
-        {tasks.map(task => {
-          if (task.day === 'Quarta'){
-            return (filterDay(task));
-          }})
-      }</div>
-      <div>
-        <h4>Quinta</h4>
-        {tasks.map(task => {
-          if (task.day === 'Quinta'){
-            return (filterDay(task));
-          }})
-      }</div>
-      <div>
-        <h4>Sexta</h4>
-        {tasks.map(task => {
-          if (task.day === 'Sexta'){
-            return (filterDay(task));
-          }})
-      }</div>
-      <div>
-        <h4>Sábado</h4>
-        {tasks.map(task => {
-          if (task.day === 'Sábado'){
-            return (filterDay(task));
-          }})
-      }</div>
-      <div>
+      <div className="App-tasks">
+        <div className="App-task">
+          <h4>Segunda</h4>
+          {tasks.map(task => {
+            if (task.day === 'Segunda'){
+              return (filterDay(task));
+            }})
+        }</div>
+        <div className="App-task">
+          <h4>Terça</h4>
+          {tasks.map(task => {
+            if (task.day === 'Terça'){
+              return (filterDay(task));
+            }})
+        }</div>
+        <div className="App-task">
+          <h4>Quarta</h4>
+          {tasks.map(task => {
+            if (task.day === 'Quarta'){
+              return (filterDay(task));
+            }})
+        }</div>
+        <div className="App-task">
+          <h4>Quinta</h4>
+          {tasks.map(task => {
+            if (task.day === 'Quinta'){
+              return (filterDay(task));
+            }})
+        }</div>
+        <div className="App-task">
+          <h4>Sexta</h4>
+          {tasks.map(task => {
+            if (task.day === 'Sexta'){
+              return (filterDay(task));
+            }})
+        }</div>
+        <div className="App-task">
+          <h4>Sábado</h4>
+          {tasks.map(task => {
+            if (task.day === 'Sábado'){
+              return (filterDay(task));
+            }})
+        }</div>
+        <div className="App-task">
         <h4>Domingo</h4>
         {tasks.map(task => {
           if (task.day === 'Domingo'){
@@ -159,11 +162,13 @@ function App() {
           }})
       }
       </div>
+      </div>
       {inputUpdate && 
         <form 
           data-testid="form"
           onSubmit={updateTask}>
           <input 
+            className="App-form"
             name="text"
             placeholder="Atualizar Tarefa"
             onChange={onChangeInput}
@@ -183,8 +188,11 @@ function App() {
                 title={`update${day}`}>{day}</option>
             })}
           </select>
-          <button onClick={() => setInputUpdate(false)}>Cancelar</button>
-          <button>Atualizar</button>
+          <button 
+            className="App-btn"
+            onClick={() => setInputUpdate(false)}>Cancelar</button>
+          <button
+            className="App-btn">Atualizar</button>
         </form>}
     </div>
   );
