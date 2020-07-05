@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useForm } from './hooks/useForm';
 import api from './service/api';
 import './App.css';
-import axios from 'axios';
 
 function App() {
   const days = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];
@@ -16,7 +15,7 @@ function App() {
   });
 
   useEffect(() => {
-    axios.get('https://us-central1-labenu-apis.cloudfunctions.net/generic/planner-mello-arturmagalhaes')
+    api.get('')
       .then(response => {
       setTasks(response.data);
     }).catch(error => { 
@@ -31,7 +30,7 @@ function App() {
   const createTask = (event) => {
     event.preventDefault();
     if(form.text !== ''){
-      axios.post('https://us-central1-labenu-apis.cloudfunctions.net/generic/planner-mello-arturmagalhaes', form)
+      api.post('', form)
         .then( response => {
           setCheckCreateTask(true)
           form.text = '';

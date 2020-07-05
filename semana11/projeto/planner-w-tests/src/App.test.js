@@ -1,13 +1,13 @@
 import React from 'react';
-import axios from 'axios';
 import { render, fireEvent, wait, getByTitle, getByTestId } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 //import "@testing-library/jest-dom/extend-expect";
 import App from './App';
+import api from '../src/service/api'
 
-axios.get = jest.fn().mockResolvedValue({data: []})
-axios.post = jest.fn().mockResolvedValue()
-axios.delete = jest.fn().mockResolvedValue()
+api.get = jest.fn().mockResolvedValue({data: []})
+api.post = jest.fn().mockResolvedValue()
+api.delete = jest.fn().mockResolvedValue()
 
 //Os outros testes já passam pelo input e select
 test.skip('input and select', async () => {
@@ -23,7 +23,7 @@ test.skip('input and select', async () => {
 
 test('criar tarefa', async () => {
   //if true
-  axios.post = jest.fn().mockResolvedValue()
+  //axios.post = jest.fn().mockResolvedValue()
 
   const { getByPlaceholderText, getByTestId, getByText, getByTitle } = render (<App />);
   const inputElement = getByPlaceholderText(/tarefa/i);
@@ -39,7 +39,7 @@ test('criar tarefa', async () => {
   fireEvent.submit(buttonForm)
 
   //#####  AXIOS POST APÓS CLICAR NO BOTÃO SUBMIT  #####
-  expect(axios.post).toHaveBeenCalledTimes(1);
+  expect(api.post).toHaveBeenCalledTimes(1);
 
 })
 
@@ -62,7 +62,7 @@ test('Criar tarefa sem texto', async () => {
 
 test('renderização e deleção de Tarefa', async () => {
 
-  axios.get = jest.fn().mockResolvedValue({
+  api.get = jest.fn().mockResolvedValue({
     data: [
       {
       "day": "Quinta",
@@ -80,7 +80,7 @@ test('renderização e deleção de Tarefa', async () => {
 
   expect(getByText(/Submit/)).toBeInTheDocument();
 
-  expect(axios.get).toHaveBeenCalled()
+  expect(api.get).toHaveBeenCalled()
 
   const tarefa = await findByText("Tocar violão")
   expect(tarefa).toBeInTheDocument()
@@ -91,7 +91,7 @@ test('renderização e deleção de Tarefa', async () => {
 
   expect(deleteTask).toBeInTheDocument()
   userEvent.click(deleteTask)
-  axios.delete = jest.fn().mockResolvedValue({
+  api.delete = jest.fn().mockResolvedValue({
     data: [
       {
       "day": "Quinta",
@@ -101,12 +101,12 @@ test('renderização e deleção de Tarefa', async () => {
     ]
   });
 
-  expect(axios.get).toHaveBeenCalled()
+  expect(api.get).toHaveBeenCalled()
 })
 
 test('Renderização e atualização', async () => {
   
-  axios.get = jest.fn().mockResolvedValue({
+  api.get = jest.fn().mockResolvedValue({
     data: [
       {
       "day": "Quinta",
@@ -123,7 +123,7 @@ test('Renderização e atualização', async () => {
   expect(input).toBeInTheDocument();
 
   expect(getByText(/Submit/)).toBeInTheDocument();
-  expect(axios.get).toHaveBeenCalled();
+  expect(api.get).toHaveBeenCalled();
 
   const tarefa = await findByText('Tocar violão')
 
@@ -141,7 +141,7 @@ test('Renderização e atualização', async () => {
   const btnUpdate = getByText(/Atualizar/i);
   userEvent.click(btnUpdate);
 
-  axios.put = jest.fn().mockResolvedValue({
+  api.put = jest.fn().mockResolvedValue({
     data: [
       {
       "day": "Sábado",
