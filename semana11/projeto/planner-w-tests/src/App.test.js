@@ -154,3 +154,37 @@ test('Renderização e atualização', async () => {
   
   wait(()=> expect(getByText('Tocar violão para a família')).toBeInTheDocument())
 })
+
+test('Renderização, form edit e cancel edit', async () => {
+  
+  api.get = jest.fn().mockResolvedValue({
+    data: [
+      {
+      "day": "Quinta",
+      "text": "Surfar",
+      "id": "oZQM9nKVyYbCj1IlogYb",
+      },
+    ]
+  });
+
+  
+  const { container,getByText, getByPlaceholderText, findByText, getByTitle, getByTestId } = render(<App />)
+
+  const input = getByPlaceholderText(/Tarefa/i);
+  expect(input).toBeInTheDocument();
+
+  expect(getByText(/Submit/)).toBeInTheDocument();
+  await wait(() => expect(api.get).toHaveBeenCalled());
+
+  const tarefa = await findByText('Surfar')
+
+  const edit = getByTitle('editoZQM9nKVyYbCj1IlogYb')
+  userEvent.click(edit)
+  
+  const form = getByTestId('formUpdate');
+  const cancel = getByText('Cancelar');
+  userEvent.click(cancel);
+  
+  await console.log(container.innerHTML)
+  await expect(form).not.toBeInTheDocument()
+  })
