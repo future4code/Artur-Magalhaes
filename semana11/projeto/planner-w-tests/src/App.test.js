@@ -60,6 +60,57 @@ test('Criar tarefa sem texto', async () => {
   
 })
 
+test('renderização inicial com agenda lotada', async () => {
+
+  api.get = jest.fn().mockResolvedValue({
+    data: [
+      {
+      "day": "Segunda",
+      "text": "Aula da labenu",
+      "id": "aZQM9nKVyYbCj1IlogYb",
+      },
+      {
+        "day": "Terça",
+        "text": "Aula de violão",
+        "id": "bZQM9nKVyYbCj1IlogYb",
+      },
+      {
+        "day": "Quarta",
+        "text": "Aula de teclado",
+        "id": "cZQM9nKVyYbCj1IlogYb",
+      },
+      {
+      "day": "Quinta",
+      "text": "Tocar violão",
+      "id": "oZQM9nKVyYbCj1IlogYb",
+      },
+      {
+      "day": "Sexta",
+      "text": "Jogar futebol",
+      "id": "dZQM9nKVyYbCj1IlogYb",
+      },
+      {
+        "day": "Sábado",
+        "text": "Surfar",
+        "id": "fZQM9nKVyYbCj1IlogYb",
+      },
+      {
+        "day": "Domingo",
+        "text": "Ir à praia",
+        "id": "gZQM9nKVyYbCj1IlogYb",
+      },
+    ]
+  });
+
+  
+  const { getByText, getByPlaceholderText, findByText, getByTitle } = render(<App />)
+
+  expect(api.get).toHaveBeenCalled()
+
+  const tarefa = await findByText("Tocar violão")
+  expect(tarefa).toBeInTheDocument()
+})
+
 test('renderização e deleção de Tarefa', async () => {
 
   api.get = jest.fn().mockResolvedValue({
@@ -168,7 +219,7 @@ test('Renderização, form edit e cancel edit', async () => {
   });
 
   
-  const { container,getByText, getByPlaceholderText, findByText, getByTitle, getByTestId } = render(<App />)
+  const { getByText, getByPlaceholderText, findByText, getByTitle, getByTestId } = render(<App />)
 
   const input = getByPlaceholderText(/Tarefa/i);
   expect(input).toBeInTheDocument();
@@ -184,7 +235,6 @@ test('Renderização, form edit e cancel edit', async () => {
   const form = getByTestId('formUpdate');
   const cancel = getByText('Cancelar');
   userEvent.click(cancel);
-  
-  await console.log(container.innerHTML)
+
   await expect(form).not.toBeInTheDocument()
-  })
+})
