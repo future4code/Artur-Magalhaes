@@ -4,8 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node ./src/index.ts",
-    "build": "tsc && node ./build/index.js"
+    "start": "ts-node ./src/exercicio1/index.ts",
+    "build": "tsc && node ./build/index.js",
+    "exercicio2": "ts-node ./src/exercicio2/exercicio2.ts",
+    "buildEx2": "tsc && node ./build/exercicio2.js",
+    "exercicio3": "ts-node ./src/exercicio3/exercicio3.ts",
+    "buildEx3": "tsc && node ./build/exercicio3.js"
   },
   "author": "",
   "license": "ISC",
