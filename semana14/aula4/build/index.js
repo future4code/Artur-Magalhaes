@@ -22,3 +22,9 @@ function getSubscribers() {
     });
 }
 getSubscribers();
+const getSubscribers2 = () => __awaiter(void 0, void 0, void 0, function* () {
+    const users = yield axios_1.default.get(`${baseUrl}/subscribers/all`);
+    console.log(users.data);
+    return users.data;
+});
+getSubscribers2();
