@@ -20,6 +20,8 @@ type Notifications = {
 	message: string,
 }
 
+let listUsers:User[] = []
+
 //1.
 async function getSubscribers(): Promise<User[]> {
     const users = await axios.get(`${baseUrl}/subscribers/all`);
@@ -32,6 +34,7 @@ getSubscribers()
 const getSubscribers2 = async ():Promise<User[]> => {
     const users = await axios.get(`${baseUrl}/subscribers/all`);
     console.log(users.data)
+    listUsers.push(users.data)
     return users.data
 }
 getSubscribers2()
@@ -71,17 +74,18 @@ function createNews(title: string, content:string):void {
 
 createNews("Mello no backend", "Bem vindo");
 
-/*
-function sendNews(subscriberId:string, message:string) {
 
-    const body = {
-        subscriberId,
-        message,
+const sendNotification = async (users:User[], message:string): Promise<void> => {
+
+    for (const user of users){  
+        axios.post(`${baseUrl}/notifications/send`, 
+        {
+            subscriberId: user.id,
+            message: message,
+        })
     }
-
-    axios.post(`${baseUrl}/notifications/send`, body)
-        .then(() => console.log(body.message))
-        .catch(error => console.error(error));
+    
+    console.log("Notificação enviada")
 }
-sendNews("km12cB7GANWHLYh5KzEC", "Mello no backend")
-*/
+
+sendNotification(listUsers, "Bem vindo")

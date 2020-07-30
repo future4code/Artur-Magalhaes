@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = __importDefault(require("axios"));
 const moment_1 = __importDefault(require("moment"));
 const baseUrl = "ttps://us-central1-labenu-apis.cloudfunctions.net/labenews";
+let listUsers = [];
 function getSubscribers() {
     return __awaiter(this, void 0, void 0, function* () {
         const users = yield axios_1.default.get(`${baseUrl}/subscribers/all`);
@@ -26,6 +27,7 @@ getSubscribers();
 const getSubscribers2 = () => __awaiter(void 0, void 0, void 0, function* () {
     const users = yield axios_1.default.get(`${baseUrl}/subscribers/all`);
     console.log(users.data);
+    listUsers.push(users.data);
     return users.data;
 });
 getSubscribers2();
@@ -51,3 +53,13 @@ function createNews(title, content) {
         .catch(error => console.error(error));
 }
 createNews("Mello no backend", "Bem vindo");
+const sendNotification = (users, message) => __awaiter(void 0, void 0, void 0, function* () {
+    for (const user of users) {
+        axios_1.default.post(`${baseUrl}/notifications/send`, {
+            subscriberId: user.id,
+            message: message,
+        });
+    }
+    console.log("Notificação enviada");
+});
+sendNotification(listUsers, "Bem vindo");
