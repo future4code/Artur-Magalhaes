@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = __importDefault(require("axios"));
+const moment_1 = __importDefault(require("moment"));
 const baseUrl = "ttps://us-central1-labenu-apis.cloudfunctions.net/labenews";
 function getSubscribers() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -39,3 +40,14 @@ const getSubscribers3 = () => __awaiter(void 0, void 0, void 0, function* () {
         };
     });
 });
+function createNews(title, content) {
+    const body = {
+        title,
+        content,
+        date: moment_1.default.now()
+    };
+    axios_1.default.put(`${baseUrl}/news`, body)
+        .then(() => console.log(body.title))
+        .catch(error => console.error(error));
+}
+createNews("Mello no backend", "Bem vindo");
