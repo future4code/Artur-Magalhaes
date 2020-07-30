@@ -37,7 +37,7 @@ const getSubscribers2 = async ():Promise<User[]> => {
     listUsers.push(users.data)
     return users.data
 }
-getSubscribers2()
+
 
 //3a)Não há erro de tipagem.
 const getSubscribers3 = async ():Promise<User[]> => {
@@ -108,4 +108,49 @@ const sendNotification2 = async (users:User[], message:string): Promise<void> =>
     console.log("Notificação enviada")
 }
 
-sendNotification2(listUsers, "Bem vindo")
+sendNotification2(listUsers, "Bem vindo");
+
+//7.
+async function createUser(name: string, email: string) {
+    const body = {
+        name,
+        email
+    }
+    await axios.put(`${baseUrl}/subscribers`, body);
+
+}
+
+createUser('Artur', 'artur@gmail.com')
+
+async function createNews2(title: string, content:string): Promise<void> {
+    const body = {
+        title,
+        content,
+        date: moment.now()
+    }
+    await getSubscribers2()
+    console.log(listUsers)
+
+    await axios.put(`${baseUrl}/news`,body)
+        .then(() => {
+            sendNotification2(listUsers, "Nova notícia");
+            console.log(body.title)
+        })
+        .catch(error => console.error(error))
+}
+
+createNews2("Mello no backend", "Bem vindo");
+
+const notifications = async () => {
+    const promiseArray = []
+    const users = await getSubscribers()
+    for(const user of users){
+        promiseArray.push(axios.get(`${baseUrl}/subscribers/${user.id}/notifications/all`))
+    }
+    const result = await Promise.all(promiseArray)
+    return result.map(res => {
+        res.data
+    })
+}
+
+notifications()

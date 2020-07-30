@@ -30,7 +30,6 @@ const getSubscribers2 = () => __awaiter(void 0, void 0, void 0, function* () {
     listUsers.push(users.data);
     return users.data;
 });
-getSubscribers2();
 const getSubscribers3 = () => __awaiter(void 0, void 0, void 0, function* () {
     const users = yield axios_1.default.get(`${baseUrl}/subscribers/all`);
     return users.data.map((user) => {
@@ -76,3 +75,43 @@ const sendNotification2 = (users, message) => __awaiter(void 0, void 0, void 0, 
     console.log("Notificação enviada");
 });
 sendNotification2(listUsers, "Bem vindo");
+function createUser(name, email) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const body = {
+            name,
+            email
+        };
+        yield axios_1.default.put(`${baseUrl}/subscribers`, body);
+    });
+}
+createUser('Artur', 'artur@gmail.com');
+function createNews2(title, content) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const body = {
+            title,
+            content,
+            date: moment_1.default.now()
+        };
+        yield getSubscribers2();
+        console.log(listUsers);
+        yield axios_1.default.put(`${baseUrl}/news`, body)
+            .then(() => {
+            sendNotification2(listUsers, "Nova notícia");
+            console.log(body.title);
+        })
+            .catch(error => console.error(error));
+    });
+}
+createNews2("Mello no backend", "Bem vindo");
+const notifications = () => __awaiter(void 0, void 0, void 0, function* () {
+    const promiseArray = [];
+    const users = yield getSubscribers();
+    for (const user of users) {
+        promiseArray.push(axios_1.default.get(`${baseUrl}/subscribers/${user.id}/notifications/all`));
+    }
+    const result = yield Promise.all(promiseArray);
+    return result.map(res => {
+        res.data;
+    });
+});
+notifications();
