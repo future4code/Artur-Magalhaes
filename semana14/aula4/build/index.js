@@ -59,7 +59,20 @@ const sendNotification = (users, message) => __awaiter(void 0, void 0, void 0, f
             subscriberId: user.id,
             message: message,
         });
+        console.log(user.id);
     }
     console.log("Notificação enviada");
 });
 sendNotification(listUsers, "Bem vindo");
+const sendNotification2 = (users, message) => __awaiter(void 0, void 0, void 0, function* () {
+    const promiseArray = [];
+    for (const user of users) {
+        promiseArray.push(axios_1.default.post(`${baseUrl}/notifications/send`, {
+            subscriberId: user.id,
+            message: message,
+        }));
+    }
+    yield Promise.all(promiseArray);
+    console.log("Notificação enviada");
+});
+sendNotification2(listUsers, "Bem vindo");

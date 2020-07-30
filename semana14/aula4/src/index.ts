@@ -83,9 +83,29 @@ const sendNotification = async (users:User[], message:string): Promise<void> => 
             subscriberId: user.id,
             message: message,
         })
+        console.log(user.id)
     }
     
     console.log("Notificação enviada")
 }
 
 sendNotification(listUsers, "Bem vindo")
+
+//6. a) Promise.all retorna os valores de uma lista de promise
+
+const sendNotification2 = async (users:User[], message:string): Promise<void> => {
+    const promiseArray = [];
+
+    for (const user of users){  
+        promiseArray.push(axios.post(`${baseUrl}/notifications/send`, 
+            {
+                subscriberId: user.id,
+                message: message,
+            })
+        )
+    }
+    await Promise.all(promiseArray);
+    console.log("Notificação enviada")
+}
+
+sendNotification2(listUsers, "Bem vindo")
