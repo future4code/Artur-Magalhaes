@@ -28,3 +28,14 @@ const getSubscribers2 = () => __awaiter(void 0, void 0, void 0, function* () {
     return users.data;
 });
 getSubscribers2();
+const getSubscribers3 = () => __awaiter(void 0, void 0, void 0, function* () {
+    const users = yield axios_1.default.get(`${baseUrl}/subscribers/all`);
+    return users.data.map((user) => {
+        console.log(user);
+        return {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+        };
+    });
+});
