@@ -36,6 +36,6 @@ export class User {
         }
 
         public introduceYourself(): string {
-            return "Olá, Bom dia!"
+            return `Olá sou ${this.name}, Bom dia!`
         }
 }
