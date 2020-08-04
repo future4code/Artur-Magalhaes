@@ -62,3 +62,7 @@ console.log(
 )
 //8.b) Os mesmos atributos e métodos da classe pai Employee, por que possuem métodos públicos
 
+
+seller.setSalesQuantity()
+//9.a) O valor salesQuantity so poderá ser acessado na própria classe Seller
+

@@ -2,7 +2,8 @@ import { User } from "./User";
 import { Employee } from "./Employee";
 
 export class Seller extends Employee {
-    
+    private salesQuantity: number = 0
+
     constructor(
         id:string, 
         email: string, 
@@ -13,4 +14,6 @@ export class Seller extends Employee {
             super(id, email, name, password, baseSalary, admissionDate)
         }
 
+    public setSalesQuantity = () => this.salesQuantity++
+    
 }
