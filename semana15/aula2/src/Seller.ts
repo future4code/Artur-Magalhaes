@@ -3,6 +3,7 @@ import { Employee } from "./Employee";
 
 export class Seller extends Employee {
     private salesQuantity: number = 0
+    static SELLING_COMMISION: number = 5
 
     constructor(
         id:string, 
@@ -17,6 +18,6 @@ export class Seller extends Employee {
     public setSalesQuantity = () => this.salesQuantity++
     
     public calculateTotalSalary = () => {
-        return this.baseSalary + 400 + (5 * this.salesQuantity)
+        return this.baseSalary + Employee.BENEFITS_VALUE + (Seller.SELLING_COMMISION * this.salesQuantity)
     }
 }

@@ -4,6 +4,7 @@ import moment from 'moment';
 export class Employee extends User {
     protected baseSalary: number
     protected admissionDate: Date
+    static BENEFITS_VALUE: number = 400
 
     constructor(
         id:string, 
@@ -22,6 +23,6 @@ export class Employee extends User {
     public getAdmissionDate = (): Date => this.admissionDate
 
     public calculateTotalSalary = (): number => {
-        return this.baseSalary += 400
+        return this.baseSalary += Employee.BENEFITS_VALUE
     }
 }
