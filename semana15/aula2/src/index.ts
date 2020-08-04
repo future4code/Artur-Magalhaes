@@ -66,3 +66,6 @@ console.log(
 seller.setSalesQuantity()
 //9.a) O valor salesQuantity so poderá ser acessado na própria classe Seller
 
+console.log(seller.calculateTotalSalary())
+//10.a) Imprime o total calculado pela classe Seller
+

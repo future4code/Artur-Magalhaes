@@ -16,4 +16,7 @@ export class Seller extends Employee {
 
     public setSalesQuantity = () => this.salesQuantity++
     
+    public calculateTotalSalary = () => {
+        return this.baseSalary + 400 + (5 * this.salesQuantity)
+    }
 }
