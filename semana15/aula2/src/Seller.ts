@@ -1,14 +1,16 @@
 import { User } from "./User";
 import { Employee } from "./Employee";
 
-export class Salesman extends Employee {
+export class Seller extends Employee {
+    
     constructor(
         id:string, 
         email: string, 
         name: string, 
         password: string,
-        baseSalary: number){
-            super(id, email, name, password, baseSalary)
-            
+        baseSalary: number,
+        admissionDate: Date){
+            super(id, email, name, password, baseSalary, admissionDate)
         }
+
 }

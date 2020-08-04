@@ -2,6 +2,7 @@ import { User } from './User'
 import { Customer } from './Customer'
 import { Employee } from './Employee'
 import moment from 'moment'
+import { Seller } from './Seller'
 
 const user = new User("12345", "artur@gmail.com", "Artur", "123456")
 
@@ -45,3 +46,19 @@ console.log(
 
 //7.
 console.log(employee.calculateTotalSalary())
+
+
+const seller = new Seller("456789", "vendedor@gmail.com", "Venderdor", "456789", 5000, new Date("01/02/2020"))
+//8.a) Os mesmos parâmetros de Employee
+ 
+console.log(
+    seller.calculateTotalSalary(),
+    seller.getAdmissionDate(),
+    seller.getBaseSalary(),
+    seller.getEmail(),
+    seller.getId(),
+    seller.getName(),
+    seller.introduceYourself()
+)
+//8.b) Os mesmos atributos e métodos da classe pai Employee, por que possuem métodos públicos
+
