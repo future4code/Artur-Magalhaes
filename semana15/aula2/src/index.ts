@@ -43,3 +43,5 @@ console.log(
     employee.introduceYourself()
 )
 
+//7.
+console.log(employee.calculateTotalSalary())

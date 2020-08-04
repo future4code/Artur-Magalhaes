@@ -17,7 +17,11 @@ export class Employee extends User {
             this.admissionDate = admissionDate
         }
 
-    public getBaseSalary = () => this.baseSalary
+    public getBaseSalary = (): number => this.baseSalary
 
-    public getAdmissionDate = () => this.admissionDate
+    public getAdmissionDate = (): Date => this.admissionDate
+
+    public calculateTotalSalary = (): number => {
+        return this.baseSalary += 400
+    }
 }
