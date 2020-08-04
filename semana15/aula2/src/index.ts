@@ -20,3 +20,8 @@ console.log(
     customer.getName(),
     customer.purchaseTotal)
 //3.a) Não por que não tem nenhum método público para mostrar esse atributo
+
+//4.
+console.log(
+    customer.introduceYourself()
+)
