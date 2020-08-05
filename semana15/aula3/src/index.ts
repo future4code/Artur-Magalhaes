@@ -72,3 +72,10 @@ clientManager.addClient(commercialClient)
 clientManager.addClient(industrialClient)
 
 console.log(clientManager.getClientsQuantity())
+console.log(clientManager.calculateBillofClient(2))
+console.log(clientManager.calculateTotalIncome())
+
+
+clientManager.deleteUser(2)
+
+console.log(clientManager.getClients())
