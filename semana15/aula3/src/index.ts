@@ -58,3 +58,7 @@ console.log(
 //5.a) Implementa a interface Client com seus atributos e métodos e estende a classe abstrata Place que possui o atributo cep.
 //5.b) Atributo cpf em ResidentialClient e cnpj em CommercialClient, e a implementação do método da interface
 
+//6.a) Deve ser filha de Industry para pegar o atributo machinesQuantity.
+//6.b) Implementa a interface Client, por que ela representa um cliente do tipo industria.
+//6.c) Por que não será necessário alterar os valores iniciais.
+
