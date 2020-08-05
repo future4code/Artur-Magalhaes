@@ -1,5 +1,8 @@
 import { Client } from './Client';
 import { Place } from './Place';
+import { Residence } from './Residence';
+import { Commerce } from './Commerce';
+import { Industry } from './Industry';
 
 const client: Client = {
     name: "Artur",
@@ -20,8 +23,21 @@ console.log(
 
 //1.a) Todas as informações foram impressas
 
-const place = new Place("60000000")
-console.log(place)
+//const place = new Place("60000000")
+//console.log(place)
 
 //2.a) Não é possível criar instancia de uma classe abstrata
 //2.b) Deve criar outra classe que estenda a classe abstrata.
+
+const residence = new Residence(3,"60000000")
+const commerce = new Commerce(2, "60000100")
+const industry = new Industry(1, "60000200")
+
+console.log(
+    residence,
+    commerce, 
+    industry,
+    residence.getResidentsQuantity(),
+    commerce.getFloorsQuantity(),
+    industry.getMachinesQuantity()
+    )
