@@ -41,3 +41,6 @@ console.log(
     commerce.getFloorsQuantity(),
     industry.getMachinesQuantity()
     )
+
+//4.a) Deve-se implementar os atributos e métodos da interface Client (name, registrationNumber, consumedEnergy) e da superclasse Residence (cep e residentsQuantity)
+//     Tem que implementar também o método para pegar o item privado (cpf)
