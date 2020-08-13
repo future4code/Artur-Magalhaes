@@ -42,3 +42,16 @@ d)
 
 ## 6.
 a)  Relação de M pra N, pois um filme so pode receber vários oscars e o contrário também vale.
+b)  CREATE TABLE Oscar (
+	id VARCHAR(255) PRIMARY KEY,
+    type VARCHAR(255) NOT NULL,
+    movie_id VARCHAR(255),
+    FOREIGN KEY (movie_id) REFERENCES filme(id)
+);
+c)  INSERT INTO Oscar 
+VALUES  ("004", "Melhor Filme", "001", 2002),
+		("005", "Melhor Diretor", "003", 2003),
+        ("006", "Melhor Montagem", "004", 2004);
+d)  SELECT filme.id, filme.name, Oscar.type FROM filme 
+LEFT JOIN Oscar 
+ON filme.id = Oscar.movie_id;
