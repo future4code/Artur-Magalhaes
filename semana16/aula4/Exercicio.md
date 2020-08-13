@@ -42,35 +42,3 @@ d)
 
 ## 6.
 a)  Relação de M pra N, pois um filme so pode receber vários oscars e o contrário também vale.
-
-app.get('/movie/all', async(req: Request, res: Response) => {
-    try {
-        const result = await getFifteenMovies()
-        res.status(200).send(result)
-    } catch (error) {
-        res.status(400).send({
-            message: error.message
-        })
-    }
-})
-
-## 7.
-const getSearchMovie = async(search: string): Promise<any> => {
-    const result = await connection.raw(`
-        SELECT * FROM filme WHERE( name LIKE "%${search}%" OR sinopse LIKE "%${search}%" )
-    `)
-    return result[0];
-}
-
-app.get("/movie/search", async(req: Request, res: Response) => {
-    try {
-        const movie = await getSearchMovie(req.query.query as string);
-        res.status(200).send({
-            movie: movie,
-        });
-    } catch (error) {
-        res.status(400).send({
-            message: error.message
-        })
-    }
-})
