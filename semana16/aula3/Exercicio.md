@@ -1,52 +1,16 @@
-import express, { Request, Response } from 'express';
-import { AddressInfo} from 'net';
-import knex from 'knex';
-import dotenv from 'dotenv';
+# Exercicio
 
-dotenv.config();
-
-const connection = knex({
-    client: 'mysql',
-    connection: {
-        host: process.env.DB_HOST,
-        port: Number(process.env.DB_PORT || '3306'),
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        database: process.env.DB_NAME,
+## 1.
+a)  Retorna um objeto RowDataPacket {
+      id: '001',
+      name: 'Tony Ramos',
+      salary: 400000,
+      birth_date: 1948-08-25T03:00:00.000Z,
+      gender: 'male',
+      favorite_ice_cream_flavor: null,
+      type: 'NotDirector'
     }
-})
-
-const app = express();
-
-app.use(express.json());
-
-const server = app.listen(process.env.DB_PORT || 3003, () => {
-    if(server) {
-        const address = server.address() as AddressInfo;
-        console.log(`Server is running in http://localhost:${address.port}`)
-    } else {
-        console.log(`Failure upon starting server.`)
-    }
-})
-
-//QUERIES RAW
-
-const getActorById = async(id: string): Promise<any> => {
-    try{
-        const result = await connection.raw(`
-            SELECT * FROM actor WHERE id = '${id}'
-        `)
-        console.log(result[0][0])
-
-        return result[0][0]
-    } catch (error) {
-        console.log(error)
-    }
-}
-
-//getActorById("001")
-
-const getActorByName = async(name: string): Promise<any> => {
+b)  const getActorByName = async(name: string): Promise<any> => {
     try {
         const result = await connection.raw(`
         SELECT * FROM actor WHERE name = '${name}'`);    
@@ -56,25 +20,20 @@ const getActorByName = async(name: string): Promise<any> => {
         console.log(error);
     }
 }
-
-//getActorByName("Tony Ramos");
-
-const getQuantityGender = async (gender: string) => {
+c)  const getQuantityGender = async () => {
     try{
         const result = await connection.raw(`
-        SELECT COUNT(*) as count FROM actor WHERE gender = '${gender}'
+        SELECT COUNT(*),gender FROM actor GROUP BY gender
     `);
-    return result[0][0].count
+    console.log(result[0])
+    return result[0]
     } catch (error) {
         console.log(error)
     }
 }
 
-//getQuantityGender("male")
-
-
-//QUERIES BUILDERS
-const updateSalary = async(salary: number, id: string): Promise<any> => {
+## 2.
+a)  const updateSalary = async(salary: number, id: string): Promise<any> => {
     try {
         await connection('actor') 
                                 .update({salary:salary})
@@ -84,10 +43,7 @@ const updateSalary = async(salary: number, id: string): Promise<any> => {
         console.log(error)
     }
 }
-
-//updateSalary(500000, "001");
-
-const deleteActorId = async (id: string): Promise<any> => {
+b)  const deleteActorId = async (id: string): Promise<any> => {
     try {
         await connection('actor')
                 .delete()
@@ -97,10 +53,7 @@ const deleteActorId = async (id: string): Promise<any> => {
         console.log(error); 
     }
 }
-
-//deleteActorId("001");
-
-const avgSalaryGender = async (gender: string): Promise<any> => {
+c)  const avgSalaryGender = async (gender: string): Promise<any> => {
     try {
         console.log(await connection('actor')
                 .avg("salary as average")
@@ -110,22 +63,10 @@ const avgSalaryGender = async (gender: string): Promise<any> => {
     }
 }
 
-//avgSalaryGender("male")
-
-// ENDPOINT EXPRESS
-app.get('/actor/:id', async (req: Request, res: Response) => {
-    try {
-        const id = req.params.id;
-        const actor = await getActorById(id);
-        res.status(200).send(actor)
-    } catch (error) {
-        res.status(400).send({
-            message: error.message,
-        })
-    }
-})
-
-app.get('/actor/gender/:gender', async (req: Request, res: Response) => {
+## 3.
+a)  Para pegar o parametro chamado id da URL.
+b)  São as respostas das requisições.
+c)app.get('/actor/gender/:gender', async (req: Request, res: Response) => {
     try {  
         const gender = req.params.gender
         const count = await getQuantityGender(gender);
@@ -138,25 +79,9 @@ app.get('/actor/gender/:gender', async (req: Request, res: Response) => {
         })
     }
 })
-/*
-app.post('/actor', async(req: Request, res: Response) => {
-    try {
-        await createActor (
-            req.body.id,
-            req.body.name,
-            req.body.salary,
-            new Date(req.body.birth_date),
-            req.body.salary,
-        );
-        res.status(200).send();
-    } catch (error) {
-        res.status(400).send({
-            message: error.message
-        })
-    }
-})*/
 
-app.put('/actor', async(req: Request, res: Response) => {
+## 4.
+a)  app.put('/actor', async(req: Request, res: Response) => {
     try{
         await updateSalary(
             req.body.salary, 
@@ -169,8 +94,7 @@ app.put('/actor', async(req: Request, res: Response) => {
         })
     }
 })
-
-app.delete('/actor/:id', async(req: Request, res: Response) => {
+b)  app.delete('/actor/:id', async(req: Request, res: Response) => {
     try{
         const id = req.params.id;
         await deleteActorId(id)
@@ -182,7 +106,7 @@ app.delete('/actor/:id', async(req: Request, res: Response) => {
     }
 })
 
-//TABELA DE FILME
+## 5. 
 const createMovie = async(
     id: string, name: string, sinopse: string, 
     release_date: Date) => {
@@ -208,6 +132,8 @@ app.post('/movie', async(req: Request, res: Response) => {
     }
 })
 
+
+## 6.
 const getFifteenMovies = async (): Promise<any> => {
     try {
         const result = await connection
@@ -231,6 +157,7 @@ app.get('/movie/all', async(req: Request, res: Response) => {
     }
 })
 
+## 7.
 const getSearchMovie = async(search: string): Promise<any> => {
     const result = await connection.raw(`
         SELECT * FROM filme WHERE( name LIKE "%${search}%" OR sinopse LIKE "%${search}%" )
