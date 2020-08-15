@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import { AddressInfo } from 'net';
 import dotenv from 'dotenv';
 import knex from 'knex';
+import moment from 'moment';
 
 const app = express();
 app.use(express.json());
@@ -72,7 +73,7 @@ const createTableTask = async(): Promise<void> => {
 //FUNÇÕES
 
 //USER
-const createUser = async(name: string, nickname: string, email: string): Promise<void> => {
+const createUser = async (name: string, nickname: string, email: string): Promise<void> => {
     try {
         await connection.raw(`
             INSERT INTO User(name,nickname,email) 
@@ -83,7 +84,7 @@ const createUser = async(name: string, nickname: string, email: string): Promise
     }
 }
 
-const getUserId = async(id: number): Promise<any> => {
+const getUserId = async (id: number): Promise<any> => {
     try {
         const result = await connection.raw(`
             SELECT id,nickname FROM User WHERE id = "${id}"
@@ -95,7 +96,7 @@ const getUserId = async(id: number): Promise<any> => {
     }
 }
 
-const editUserId = async(id: Number, name: string, nickname: string): Promise<any> => {
+const editUserId = async (id: Number, name: string, nickname: string): Promise<any> => {
     try {
         await connection.raw(`
             UPDATE User 
@@ -105,6 +106,25 @@ const editUserId = async(id: Number, name: string, nickname: string): Promise<an
     } catch (error) {
         console.log(error)
     }
+}
+
+const getAllUser = async (): Promise<any> => {
+    try{
+        const result = await connection.raw(`
+            SELECT * FROM User
+        `)
+        return result[0];
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const getUserName = async (name: string): Promise<any> => {
+    const result = await connection.raw(`
+        SELECT id, nickname FROM User 
+        WHERE name LIKE '%${name}%' OR email LIKE '%${name}%'
+    `);
+    return result[0];
 }
 
 
@@ -134,6 +154,19 @@ const getTaskId = async(id: number) => {
             WHERE Task.id = ${id};
         `);
         return result[0][0];
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const getTaskUserId = async (id: number): Promise<any> => {
+    try {
+        const result = await connection.raw(`
+        SELECT * FROM Task 
+        JOIN User ON Task.user_id = User.id
+        WHERE user_id = ${id};
+        `);
+        return result[0];
     } catch (error) {
         console.log(error)
     }
@@ -201,6 +234,53 @@ app.get('/task/:id', async(req:Request, res:Response) => {
             "creatorUserNickname": task.nickname
         }
         res.status(200).send(result)
+    } catch (error) {
+        res.status(400).send({
+            message: error.message
+        })
+    }
+})
+
+app.get('/users/all', async(req:Request, res:Response) => {
+    try {
+        const user = await getAllUser();
+        res.status(200).send(user);
+    } catch (error) {
+        res.status(400).send({
+            message: error.message
+        });
+    }
+})
+
+app.get('/tasks/creatoruserid', async(req: Request, res: Response) => {
+    try{
+        const tasks = await getTaskUserId(Number(req.query.id as string))
+        const task = {"tasks": tasks.map((element: any) => {
+            return {
+                "taskId": element.id,
+                "title": element.title,
+                "description": element.description,
+		        "limitDate": moment(element.limit_date).format("DD/MM/YYYY"),
+		        "creatorUserId": element.user_id,
+                "status": element.status,
+                "creatorUserNickname": element.nickname
+                }
+            })
+        }
+        res.status(200).send(task)
+    } catch (error) {
+        res.status(400).send({
+            message: error.message
+        })
+    }
+})
+
+app.get('/user', async(req: Request, res: Response) => {
+    try{
+        const user = {
+            "user": await getUserName(req.query.query as string)
+        }
+        res.status(200).send(user)
     } catch (error) {
         res.status(400).send({
             message: error.message
