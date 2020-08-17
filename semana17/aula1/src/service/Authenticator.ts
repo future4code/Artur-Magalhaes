@@ -1,16 +1,19 @@
 import * as jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 interface AuthenticationData {
     id: string
 }
 
 export class Authenticator {
-    private static EXPIRES_IN = '1min';
+    private static EXPIRES_IN = '30min';
 
     public generateToken(input: AuthenticationData): string {
         const token = jwt.sign(
             {
-                id: input.id,
+                id: input,
             },
             process.env.JWT_KEY as string,
             {

@@ -101,7 +101,7 @@ app.get('/user/profile', async (req: Request, res: Response) => {
         const authenticator = new Authenticator();
 
         const auth = authenticator.getData(req.headers.authorization as string);
-        console.log(auth)
+
         const result = await user.getUsers(auth.id);
         res.status(200).send(result)
     } catch (error) {
