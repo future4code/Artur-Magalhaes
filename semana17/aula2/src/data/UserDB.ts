@@ -8,14 +8,16 @@ export class UserDB extends Database{
         name: string,
         nickname: string,
         password: string,
-        email: string): Promise<void> {
+        email: string,
+        role: string): Promise<void> {
             await this.getConnection().raw(`
                 INSERT INTO ${UserDB.TABLE_NAME} 
                 VALUES ("${id}",
                         "${name}",
                         "${nickname}",
                         "${password}",
-                        "${email}");
+                        "${email}",
+                        "${role}");
             `)
     }
 

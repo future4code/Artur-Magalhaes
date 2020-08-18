@@ -3,7 +3,7 @@ import express, { Request, Response } from 'express';
 import { AddressInfo } from "net";
 import { IdGenerator } from "./services/IdGenerator";
 import { HashManager } from "./services/HashManager";
-import { Authenticator } from "./services/Authenticatior";
+import { Authenticator } from "./services/Authenticator";
 
 const app = express();
 app.use(express.json());
@@ -35,13 +35,14 @@ app.post('/signup', async (req: Request, res: Response) => {
             'nickname': req.body.nickname,
             'email': req.body.email,
             'password': req.body.password,
+            'role': req.body.role
         }
 
         const id = new IdGenerator();
 
         const isPassword = await password.hash(data.password)
         
-        user.createUsers(id.generate(), data.name, data.nickname, isPassword, data.email)
+        user.createUsers(id.generate(), data.name, data.nickname, isPassword, data.email, data.role)
         res.status(200).send({
             message: 'Usuário criado'
         })
@@ -70,7 +71,10 @@ app.get('/signin', async (req: Request, res: Response) => {
         } 
 
         const authenticator = new Authenticator()
-        const token = authenticator.generateToken(result[0].id)
+        const token = authenticator.generateToken({
+            id: result[0].id,
+            role: result[0].role
+        })
 
         res.status(200).send({
             "token": token
