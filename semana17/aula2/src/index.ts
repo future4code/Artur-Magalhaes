@@ -3,7 +3,7 @@ import express, { Request, Response } from 'express';
 import { AddressInfo } from "net";
 import { IdGenerator } from "./services/IdGenerator";
 import { HashManager } from "./services/HashManager";
-import { Authenticator } from "./services/Authenticator";
+import { Authenticator, ROLE } from "./services/Authenticator";
 
 const app = express();
 app.use(express.json());
@@ -19,6 +19,7 @@ const server = app.listen(process.env.PORT || 3003, () => {
 
 const user = new UserDB()
 const password = new HashManager()
+const authenticator = new Authenticator()
 
 app.post('/signup', async (req: Request, res: Response) => {
     try {
@@ -43,6 +44,7 @@ app.post('/signup', async (req: Request, res: Response) => {
         const isPassword = await password.hash(data.password)
         
         user.createUsers(id.generate(), data.name, data.nickname, isPassword, data.email, data.role)
+        
         res.status(200).send({
             message: 'Usuário criado'
         })
@@ -51,6 +53,8 @@ app.post('/signup', async (req: Request, res: Response) => {
             message: error.message
         })
     }
+
+    await user.destroyConnection();
 })
 
 app.get('/signin', async (req: Request, res: Response) => {
@@ -84,4 +88,57 @@ app.get('/signin', async (req: Request, res: Response) => {
             message: error.message
         })
     }
+
+    await user.destroyConnection();
+})
+
+app.get('/user/profile', async (req: Request, res: Response) => {
+    try {
+        const auth = req.headers.authorization
+        const authentication = authenticator.getData(auth as string)
+        if(authentication.role !== 'NORMAL'){
+            throw new Error ('Unauthorization')
+        }
+        const result = await user.getUsers()
+        res.status(200).send(result)
+    } catch (error) {
+        res.status(401).send({
+            message: error.message
+        })
+    }
+
+    await user.destroyConnection();
+})
+
+app.delete('/user/:id', async(req: Request, res: Response) => {
+    try {
+        const auth = req.headers.authorization;
+        const authentication = authenticator.getData(auth as string);
+        if(authentication.role !== 'ADMIN'){
+            throw new Error ('Unauthorization')
+        }
+        const id: string = req.params.id;
+        user.delete(id);
+        res.status(200).send('Usuário Deletado!')
+    } catch (error) {
+        res.status(400).send({
+            message: error.message
+        })
+    }
+
+    await user.destroyConnection();
+})
+
+app.get('/user/:id', async(req: Request, res: Response) => {
+    try {
+        const id: string = req.params.id;
+        const result = await user.getUserId(id)
+        res.status(200).send(result)
+    } catch (error) {
+        res.status(400).send({
+            message: error.message
+        })
+    }
+
+    await user.destroyConnection();
 })

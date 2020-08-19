@@ -1,6 +1,6 @@
 import * as jwt from 'jsonwebtoken';
 
-enum ROLE {
+export enum ROLE {
     normal = 'NORMAL',
     admin = 'ADMIN'
 }

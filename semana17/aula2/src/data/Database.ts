@@ -22,5 +22,11 @@ export default abstract class Database {
         return Database.CONNECTION;
     }
 
+    public async destroyConnection(): Promise<void> {
+        if(Database.CONNECTION) {
+            await Database.CONNECTION.destroy();
+            Database.CONNECTION = null;
+        }
+    }
 
 }
