@@ -1,6 +1,10 @@
 import express, { Request, Response } from "express";
 import { AddressInfo } from "net";
 import { userRouter } from "./router/UserRouter";
+import dotenv from 'dotenv';
+
+dotenv.config()
+
 const app = express();
 app.use(express.json());
 
