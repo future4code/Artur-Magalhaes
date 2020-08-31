@@ -1,5 +1,3 @@
-import { verify } from "crypto";
-
 export enum LOCATION {
     EUA = "EUA",
     BRAZIL = "BRAZIL"
@@ -38,7 +36,7 @@ let resultItemBR: ResultItem =
     {allowed: [],
     unallowed: []}
 
-function verifyAge(casino: Casino, users: User[]) {
+export function verifyAge(casino: Casino, users: User[]) {
 
     if(casino.location === "EUA"){
         for (let user of users){
@@ -93,7 +91,7 @@ function verifyAge(casino: Casino, users: User[]) {
         }
     }
 }
-
+/*
 const cassino: Casino = {
     name: "Hell Bar",
     location: LOCATION.EUA
@@ -119,4 +117,4 @@ const arrayUsers: User[] = [
     },
 ]
 
-console.log(verifyAge(cassino, arrayUsers));
+console.log(verifyAge(cassino, arrayUsers));*/
