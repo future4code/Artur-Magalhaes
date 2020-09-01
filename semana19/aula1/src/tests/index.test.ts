@@ -1,6 +1,9 @@
 import { User, performPurchase } from "..";
 import { User as User2, NACIONALITY, verifyAge, Casino, LOCATION } from "../index2";
-import { verify } from "crypto";
+import { PostDatabase } from "../PostDatabase";
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 describe.skip ("Exercicio 2", ()=> {
   
@@ -158,7 +161,7 @@ describe.skip ("Exercicio 4", ()=> {
     });
 });
 
-describe ("Exercicio 5", ()=> {
+describe.skip ("Exercicio 5", ()=> {
     test.skip("a) Escreva um teste que receba um usuário brasileiro que possa entrar em um estabelecimento no Brasil. Verifique que o tamanho do array allowed da propriedade brasilians tenha tamanho menor do que 2 e maior do que 0.", () => {
         
         const user: User2 = {
@@ -194,7 +197,7 @@ describe ("Exercicio 5", ()=> {
         expect(result.brazilian.unallowed.length).toBe(0);
     });
 
-    test.skip("Escreva um teste que receba dois usuários brasileiros e dois americanos. Todos devem ter a idade de 19 anos e quererem entrar em um estabelecimento nos Estados Unidos. Verifique que os arrays unallowed possuam o nome de algum dos usuários que você criou", () => {
+    test.skip("c) Escreva um teste que receba dois usuários brasileiros e dois americanos. Todos devem ter a idade de 19 anos e quererem entrar em um estabelecimento nos Estados Unidos. Verifique que os arrays unallowed possuam o nome de algum dos usuários que você criou", () => {
         const arrayUsers: User2[] = [
             {    
                 name: "Artur",
@@ -225,7 +228,7 @@ describe ("Exercicio 5", ()=> {
         expect(result.brazilian.unallowed).toContain('Artur');
     });
 
-    test("Escreva um teste que receba dois usuários brasileiros e dois americanos. Os brasileiros devem ter 19 anos e os americanos 21 anos. Verifique que o tamanho do array unallowed da propriedade brasilians tenha tamanho maior do que 1. Verifique que o tamanho do array unallowed da propriedade americans tenha tamanho menor do que 1. Verifique que o tamanho do array allowed da propriedade americans tenha tamanho igual a 2. ", () => {
+    test("d) Escreva um teste que receba dois usuários brasileiros e dois americanos. Os brasileiros devem ter 19 anos e os americanos 21 anos. Verifique que o tamanho do array unallowed da propriedade brasilians tenha tamanho maior do que 1. Verifique que o tamanho do array unallowed da propriedade americans tenha tamanho menor do que 1. Verifique que o tamanho do array allowed da propriedade americans tenha tamanho igual a 2. ", () => {
         
         const arrayUsers: User2[] = [
             {    
@@ -258,3 +261,49 @@ describe ("Exercicio 5", ()=> {
         expect(result.americans.allowed.length).toBe(2);
     });
 });
+
+describe.skip ("exercicio 6", () => {
+
+    test("a) ", async() => {
+        
+        const post = new PostDatabase();
+        await post.createPost({
+            id: "9000",
+            text: "Test",
+            create_at: "2020-08-31",
+            id_user: "001",
+            type: "normal",
+            photo: "string"
+        });
+
+        const postFromDb = await post.getPostId("9000");
+
+        expect(postFromDb).not.toBe(undefined);
+        expect(postFromDb).toEqual({
+            "create_at": "Mon Aug 31 2020 00:00:00 GMT-0300 (GMT-03:00)", "id": "9000", "id_user": "001", "photo": "string", "text": "Test", "type": "normal"
+        });
+
+        afterAll(async () => {
+            await post.deletePostId("9000");
+        })
+    })
+});
+
+describe ("Exercicio 7", () => {
+    test("a) ", async () => {
+        try {
+            const post = new PostDatabase();
+            await post.createPost({
+                id: "9000",
+                text: "Test",
+                create_at: "2020-08-31",
+                id_user: "001",
+                type: "normal",
+                photo: "string"
+            });
+
+        } catch (error) {
+            expect(error).not.toBe(undefined)
+        }
+    })
+})
