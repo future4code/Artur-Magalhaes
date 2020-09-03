@@ -1,4 +1,6 @@
 import { UserBusiness } from "../../src/business/UserBusiness"
+import { UserDatabase } from "../../src/data/UserDatabase"
+import { User, UserRole } from "../../src/model/User"
 
 describe("4.", () => {
 
@@ -7,7 +9,7 @@ describe("4.", () => {
   let hashGenerator = {}
   let tokenGenerator = {}
 
-    test("a", async() => {
+    test.skip("a", async() => {
         expect.assertions(1);
         try {
             const user = new UserBusiness(
@@ -22,5 +24,27 @@ describe("4.", () => {
         } catch (error) {
             expect(error.message).toBe("Unauthorization")
         }
-    })
+    });
+
+    test("b)", async() => {
+        //expect.assertions(3);
+        const user = new UserBusiness(
+            userDatabase as any,
+            idGenerator as any,
+            hashGenerator as any,
+            tokenGenerator as any
+        )
+
+        let getAllUsers = jest.fn(() => {
+            return new User("id", "name", "email", "password", UserRole.NORMAL)
+        });
+
+
+        userDatabase = {getAllUsers}
+        const result = await user.getAllUser("");
+        console.log(result)
+        expect(getAllUsers).toHaveBeenCalled
+        expect(userDatabase).toHaveBeenCalledTimes(1);
+        expect(result).toEqual({})
+    });
 })
