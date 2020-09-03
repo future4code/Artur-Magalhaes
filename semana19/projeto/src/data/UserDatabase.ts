@@ -17,4 +17,19 @@ export class UserDatabase extends BaseDatabase {
         }
     }
 
+    public async signIn(email: string) {
+        try {
+            const result = await super.getConnection().raw(`
+                SELECT * FROM ${UserDatabase.TABLE_NAME}
+                WHERE email = "${email}"
+            `);
+
+            return result[0][0];
+        } catch (error) {
+            throw new Error (error.message);
+        } finally {
+            super.destroyConnection();
+        }
+    }
+
 }

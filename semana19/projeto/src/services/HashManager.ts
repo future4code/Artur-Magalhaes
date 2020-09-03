@@ -8,7 +8,7 @@ export class HashManager {
         return result;
     }
 
-    public async compare(password: string, hash: string): Promise<boolean> {
-        return await bcrypt.compare(password, hash)
+    public async compareHash(password: string, hash: string): Promise<boolean> {
+        return bcrypt.compare(password, hash)
     }
 }

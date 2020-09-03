@@ -3,4 +3,5 @@ import { UserController } from '../controller/UserController';
 
 export const userRouter = express.Router();
 
-userRouter.post("/signup", new UserController().signUp)
+userRouter.post("/signup", new UserController().signUp);
+userRouter.post("/signin", new UserController().signIn);
