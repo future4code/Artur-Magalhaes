@@ -10,9 +10,7 @@ export class UserBusiness {
         private idGenerate: IdGenerator,
         private hashManager: HashManager,
         private authenticator: Authenticator
-        ) {
-
-    }
+        ) {}
 
     public async signUp (dataController: any) {
         try {
