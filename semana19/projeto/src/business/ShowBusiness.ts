@@ -1,5 +1,6 @@
 import { ShowDatabase } from "../data/ShowDatabase";
 import { IdGenerator } from "../services/IdGenerator";
+import { ShowModel } from "../model/Show/ShowModel";
 
 export class ShowBusiness {
     
@@ -20,7 +21,7 @@ export class ShowBusiness {
 
             const id = this.idGenerate.generate();
 
-            const dataBusiness = {
+            const dataBusiness: ShowModel = {
                 id: id,
                 week_day: dataController.week_day,
                 start: Number(dataController.start),

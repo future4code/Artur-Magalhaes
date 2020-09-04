@@ -1,4 +1,5 @@
 import { BaseDatabase } from "./base/BaseDatabase";
+import { ShowModel } from "../model/Show/ShowModel";
 
 export class ShowDatabase extends BaseDatabase {
     
@@ -13,7 +14,7 @@ export class ShowDatabase extends BaseDatabase {
         return result[0];
     }
 
-    public async addShow(data: any) {
+    public async addShow(data: ShowModel) {
         try {
             await super.getConnection().raw(`
                 INSERT INTO ${ShowDatabase.TABLE_NAME}
@@ -26,7 +27,7 @@ export class ShowDatabase extends BaseDatabase {
         }
     }
 
-    public async shows(date: any) {
+    public async shows(date: string): Promise<ShowModel[]> {
         try {
             const result = await super.getConnection().raw(`
                 SELECT * FROM ${ShowDatabase.TABLE_NAME}
