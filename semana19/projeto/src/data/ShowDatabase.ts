@@ -2,7 +2,7 @@ import { BaseDatabase } from "./base/BaseDatabase";
 
 export class ShowDatabase extends BaseDatabase {
     
-    private static TABLE_NAME = "Show";
+    private static TABLE_NAME = "Shows";
 
     public async addShow(data: any) {
         try {
