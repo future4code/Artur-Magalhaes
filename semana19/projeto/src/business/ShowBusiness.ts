@@ -14,14 +14,24 @@ export class ShowBusiness {
                 throw new Error("Invalid Entry");
             }
             
+            if(dataController.week_day !== "SEXTA" && dataController.week_day !== "SÁBADO" && dataController.week_day !== "DOMINGO"){
+                throw new Error("Invalid Day");
+            }
+
             const id = this.idGenerate.generate();
 
             const dataBusiness = {
                 id: id,
                 week_day: dataController.week_day,
-                start: dataController.start,
-                end: dataController.end,
+                start: Number(dataController.start),
+                end: Number(dataController.end),
                 band_id: dataController.band_id
+            }
+
+            const result = await this.showDatabase.getShows(dataController.week_day);
+            
+            if(result[0].start === Number(dataController.start) && result.length > 0) {
+                throw new Error("Time Unavailable");
             }
 
             await this.showDatabase.addShow(dataBusiness);

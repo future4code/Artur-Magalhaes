@@ -4,6 +4,15 @@ export class ShowDatabase extends BaseDatabase {
     
     private static TABLE_NAME = "Shows";
 
+    public async getShows(date: any) {
+        const result = await super.getConnection().raw(`
+            SELECT * FROM ${ShowDatabase.TABLE_NAME}
+            WHERE weekday = "${date}"
+        `);
+
+        return result[0];
+    }
+
     public async addShow(data: any) {
         try {
             await super.getConnection().raw(`
@@ -21,7 +30,7 @@ export class ShowDatabase extends BaseDatabase {
         try {
             const result = await super.getConnection().raw(`
                 SELECT * FROM ${ShowDatabase.TABLE_NAME}
-                WHERE week_day = "${date}"
+                WHERE weekday = "${date}"
                 ORDER BY start;
             `);
 

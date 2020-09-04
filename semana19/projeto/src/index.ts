@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 import {AddressInfo} from 'net';
 import express from 'express';
 import { userRouter } from './router/UserRouter'
-import { musicalGroupRouter } from './router/MusicalGroup';
+import { musicalGroupRouter } from './router/MusicalGroupRouter';
 import { showRouter } from './router/ShowRouter';
 
 dotenv.config();

@@ -21,7 +21,7 @@ export class MusicalGroupDatabase extends BaseDatabase{
         try {
             const result = await super.getConnection().raw(`
                 SELECT * FROM ${MusicalGroupDatabase.TABLE_NAME}
-                WHERE id = "${data}" OR name like %"${data}"%
+                WHERE id LIKE "%${data}%" OR name LIKE "%${data}%"
             `);
 
             return result[0];
