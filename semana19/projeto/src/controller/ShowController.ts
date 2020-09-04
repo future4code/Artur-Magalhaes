@@ -30,4 +30,19 @@ export class ShowController {
             });
         }
     }
+
+    public async shows(req: Request, res: Response) {
+        try {
+            const result = await ShowController.showBusiness.shows(req.body.date);
+
+            res.status(200).send({
+                result
+            })
+        } catch (error) {
+            res.status(400).send({
+                message: error.message
+            })
+        }
+    }
+
 }

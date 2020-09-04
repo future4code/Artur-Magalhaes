@@ -16,4 +16,20 @@ export class ShowDatabase extends BaseDatabase {
             await super.destroyConnection();
         }
     }
+
+    public async shows(date: any) {
+        try {
+            const result = await super.getConnection().raw(`
+                SELECT * FROM ${ShowDatabase.TABLE_NAME}
+                WHERE week_day = "${date}"
+                ORDER BY start;
+            `);
+
+            return result[0];
+        } catch (error) {
+            throw new Error(error.message);
+        } finally {
+            await super.destroyConnection();
+        }
+    }
 }

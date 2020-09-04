@@ -30,4 +30,16 @@ export class ShowBusiness {
         }
     }
 
+    public async shows(date: any) {
+        try {
+            if(!date) {
+                throw new Error("Invalid Date");
+            }
+
+            return await this.showDatabase.shows(date);
+        } catch (error) {
+            throw new Error(error.message);
+        }
+    }
+
 }

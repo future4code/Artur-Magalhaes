@@ -3,6 +3,7 @@ import {AddressInfo} from 'net';
 import express from 'express';
 import { userRouter } from './router/UserRouter'
 import { musicalGroupRouter } from './router/MusicalGroup';
+import { showRouter } from './router/ShowRouter';
 
 dotenv.config();
 
@@ -11,6 +12,7 @@ app.use(express.json());
 
 app.use("/user", userRouter);
 app.use("/musicalgroup", musicalGroupRouter);
+app.use("/shows", showRouter);
 
 const server = app.listen(3000, () => {
     if(server) {
