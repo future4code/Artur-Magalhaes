@@ -37,4 +37,17 @@ export class MusicalGroupBusiness {
             throw new Error(error.message);
         }
     }
+
+    public async detailMusicalGroup(data: string) {
+        try {
+            if(!data) {
+                throw new Error("Invalid Entry");
+            }
+            
+            return await this.musicalDatabase.detailMusicalGroup(data);
+
+        } catch (error) {
+            throw new Error (error.message);
+        }
+    }
 }
