@@ -1,43 +1,31 @@
 function quantidadeDado(letra, array){
-  let count = 0
-  for(let i of array){
-    if(i === letra){
-      count++;
+    let count = 0
+    for(let i of array){
+      if(i === letra){
+        count++;
+      }
     }
+    return count;
   }
-  return count;
-}
-
-function oneEdit(palavra, isPalavra){
-
-  if(palavra.length > isPalavra.length + 1 || 
-     palavra.length < isPalavra.length - 1){
-       return false
-     }
-  let array = []
-  let isArray = []
-  let array2 = []
-
-  if(palavra === isPalavra){
-    return true;
+  
+  function oneEdit(palavra, isPalavra){
+    let count = 0;
+    let array = [];
+  
+    if(palavra.length > isPalavra.length + 1 || 
+       palavra.length < isPalavra.length - 1){
+         return false
+       }
+    
+    for(let i of isPalavra){
+      console.log(palavra.indexOf(i))
+      if(palavra.indexOf(i) === -1){
+        count++;
+      }
+    }
+    
+    if(count >= 2){
+      return false
+    }
+    return true
   }
-
-  for(let i of palavra) {
-        array.push({
-          letra: i,
-          quantidade: quantidadeDado(i, palavra)
-        });
-  }
-
-  for(let i of isPalavra) {
-    array2.push({
-      letra: i,
-      quantidade: quantidadeDado(i, palavra)
-    });
-  }
-
-  console.log(array, array2);
-  return false;
-}
-
-console.log(oneEdit('arr', 'palavra'))
