@@ -1,0 +1,10 @@
+exercicio 1: Pelo fato da string ter tamanho n e as constantes não serem muito relevante para o calculo, a complexidade é,
+levando em consideração o for, O(n).
+
+exercicio 2: A complexidade é, levando em consideração o for, O(n).
+
+exercicio 3: Como a função executa apenas uma instrução, a complexidade é O(1).
+
+exercicio 4: O(n²) a função percorre dois arrays encadeados.
+
+exercicio 5: O(1), O(n), O(n), O(n²);
